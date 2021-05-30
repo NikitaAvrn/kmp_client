@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Никита",
+    "surname": "Аверьянов",
+    "patronymic": "Николаевич",
+    "email": "averyanov@gmail.com",
+    "phone": "+7 (987) 654-32-10",
+    "access": "all",
+    "active": true
+  },
+  {
+    "name": "Иван",
+    "surname": "Капралов",
+    "patronymic": "Иванович",
+    "email": "kapralov@gmail.com",
+    "phone": "+7 (987) 654-32-10",
+    "access": "all",
+    "active": true
+  },
+  {
+    "name": "Петр",
+    "surname": "Петров",
+    "patronymic": "Петрович",
+    "email": "petrov@gmail.com",
+    "phone": "+7 (987) 654-32-10",
+    "access": "all",
+    "active": false
+  },
+  {
+    "name": "Ксения",
+    "surname": "Гумбина",
+    "patronymic": "Владимировна",
+    "email": "gumbina@gmail.com",
+    "phone": "+7 (987) 654-32-10",
+    "access": "all",
+    "active": true
+  }
+]

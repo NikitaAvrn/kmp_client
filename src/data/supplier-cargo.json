@@ -1,0 +1,159 @@
+[
+    {
+        "title": "Наименование",
+        "number": "0000-000002",
+        "date-number": "2021-02-01",
+        "contractor": "ООО Рога и Копыта",
+        "customer": [
+            "ИП Иванов Петр Сидорович",
+            "ООО ГлавРыба"
+        ],
+        "contract": "Договор поставки",
+        "waybill": "KD8304-2432/21",
+        "date-waybill": "2021-02-02",
+        "comment": "Комментарий",
+        "cargo": [
+            {
+                "nomenclature": "Разное оборудование",
+                "length": 6,
+                "width": 3,
+                "height": 5,
+                "weight": 950,
+                "packaging": "Ящик",
+                "count": 4,
+                "date-delliver": "2021-02-04",
+                "unit": "Штука"
+            },
+            {
+                "nomenclature": "Апельсины",
+                "length": 2,
+                "width": 2,
+                "height": 4,
+                "weight": 734,
+                "packaging": "Ящик",
+                "count": 18,
+                "date-delliver": "2021-02-06",
+                "unit": "Штука"
+            },
+            {
+                "nomenclature": "Автомобили",
+                "length": 6,
+                "width": 3,
+                "height": 2,
+                "weight": 1950,
+                "packaging": "Неупакованные",
+                "count": 1,
+                "date-delliver": "2021-02-04",
+                "unit": "Штука"
+            },
+            {
+                "nomenclature": "Консервы",
+                "length": 2,
+                "width": 5,
+                "height": 9,
+                "weight": 37,
+                "packaging": "Контейнер",
+                "count": 67,
+                "date-delliver": "2021-02-08",
+                "unit": "Килограмм"
+            }
+        ]
+    },
+    {
+        "title": "Наименование",
+        "number": "0000-000003",
+        "date-number": "2021-02-01",
+        "contractor": "ООО Рога и Копыта",
+        "customer": [
+            "ПАО Газпром"
+        ],
+        "contract": "Договор поставки",
+        "waybill": "KD7654-2432/21",
+        "date-waybill": "2021-02-02",
+        "comment": "Комментарий",
+        "cargo": [
+            {
+                "nomenclature": "Разное оборудование",
+                "length": 6,
+                "width": 3,
+                "height": 5,
+                "weight": 950,
+                "packaging": "Ящик",
+                "count": 4,
+                "date-delliver": "2021-02-04",
+                "unit": "Штука"
+            },
+            {
+                "nomenclature": "Автомобили",
+                "length": 6,
+                "width": 3,
+                "height": 2,
+                "weight": 1950,
+                "packaging": "Неупакованные",
+                "count": 1,
+                "date-delliver": "2021-02-04",
+                "unit": "Штука"
+            },
+            {
+                "nomenclature": "Консервы",
+                "length": 2,
+                "width": 5,
+                "height": 9,
+                "weight": 37,
+                "packaging": "Контейнер",
+                "count": 67,
+                "date-delliver": "2021-02-08",
+                "unit": "Килограмм"
+            }
+        ]
+    },
+    {
+        "title": "Наименование",
+        "number": "0000-000005",
+        "date-number": "2021-02-01",
+        "contractor": "ООО Рога и Копыта",
+        "customer": [
+            "ИП Иванов Петр Сидорович",
+            "ООО ГлавРыба"
+        ],
+        "contract": "Договор поставки",
+        "waybill": "KF6504-2432/21",
+        "date-waybill": "2021-02-02",
+        "comment": "Комментарий",
+        "cargo": [
+            {
+                "nomenclature": "Разное оборудование",
+                "length": 6,
+                "width": 3,
+                "height": 5,
+                "weight": 950,
+                "packaging": "Ящик",
+                "count": 4,
+                "date-delliver": "2021-02-04",
+                "unit": "Штука"
+            },
+            {
+                "nomenclature": "Апельсины",
+                "length": 2,
+                "width": 2,
+                "height": 4,
+                "weight": 734,
+                "packaging": "Ящик",
+                "count": 18,
+                "date-delliver": "2021-02-06",
+                "unit": "Штука"
+            },
+            {
+                "nomenclature": "Консервы",
+                "length": 2,
+                "width": 5,
+                "height": 9,
+                "weight": 37,
+                "packaging": "Контейнер",
+                "count": 67,
+                "date-delliver": "2021-02-08",
+                "unit": "Килограмм"
+            }
+        ]
+    }
+]

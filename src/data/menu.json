@@ -1,0 +1,60 @@
+[
+  {
+    "url": "/",
+    "icon": "dashboard",
+    "title": "Информация",
+    "tooltip": "Общая оперативная информация, графики, статистика",
+    "exact": true
+  },
+  {
+    "url": "/requests",
+    "icon": "create",
+    "title": "Заявки на перевозку",
+    "tooltip": "Подача заявки на перевозку груза"
+  },
+  {
+    "url": "/manifest",
+    "icon": "folder_open",
+    "title": "Манифесты",
+    "tooltip": "Документ, содержащий перечень коносаментов"
+  },
+  {
+    "url": "/invoice",
+    "icon": "local_atm",
+    "title": "Счета",
+    "tooltip": "Ввод данных о комплектации контейнера"
+  },
+  {
+    "url": "/dislocation",
+    "icon": "pin_drop",
+    "title": "Дислокация груза",
+    "tooltip": "Ввод данных о комплектации контейнера"
+  },
+  {
+    "url": "/history",
+    "icon": "restore",
+    "title": "История перевозок",
+    "tooltip": "Ввод данных о комплектации контейнера"
+  },
+  {
+    "url": "/users",
+    "icon": "supervisor_account",
+    "title": "Пользователи",
+    "tooltip": "Список пользователей программы и их прав доступа",
+    "hideTitle": true
+  },
+  {
+    "url": "/options",
+    "icon": "build",
+    "title": "Настройки",
+    "tooltip": "Список пользователей программы и их прав доступа",
+    "hideTitle": true
+  },
+  {
+    "url": "/logout",
+    "icon": "logout",
+    "title": "Выйти",
+    "tooltip": "Список пользователей программы и их прав доступа",
+    "hideTitle": true
+  }
+]
