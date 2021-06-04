@@ -1,5 +1,5 @@
 <template>
-  <div class="card white">
+  <div class="card white z-depth-3">
     <div class="card-content black-text">
       <span class="card-title"
         >№{{ request.number }} <small>от {{ request.date }}</small></span

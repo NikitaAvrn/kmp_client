@@ -1,38 +1,52 @@
 export default {
   state: {
-    requestList: [],
+    requests: [],
+    history: [],
     requestProccessing: null
   },
   getters: {
-    REQUEST_LIST: (s) => s.requestList,
+    REQUEST_LIST: (s) => s.requests,
+    HISTORY_LIST: (s) => s.history,
     REQUEST_PROCCESSING: (s) => s.requestProccessing
   },
   mutations: {
-    SET_REQUEST_LIST: (s, l) => (s.requestList = l),
-    CLR_REQUEST_LIST: (s) => (s.requestList = []),
+    SET_REQUEST_LIST: (s, l) => (s.requests = l),
+    SET_HISTORY_LIST: (s, l) => (s.history = l),
+    CLR_REQUEST_LIST: (s) => (s.requests = []),
     DEL_REQUEST: (s, req) => {
-      let index = s.requestList.findIndex(request => req._id === request._id)
-      s.requestList.splice(index, 1)
+      let index = s.requests.findIndex(request => req._id === request._id)
+      s.requests.splice(index, 1)
     },
-    SET_REQUEST_PROCCESSING: (s, rp) => 
-    {
-      s.requestProccessing = rp
-      s.requestProccessing.number = s.requestProccessing.customer.prefix + '-' + s.requestProccessing.number
-    }
+    SET_REQUEST_PROCCESSING: (s, rp) => { s.requestProccessing = rp }
   },
   actions: {
-    async getRequestList({ commit, getters, dispatch }) {
+    async getHistoryRequests({ commit, getters, dispatch }) {
       try {
         const response = await dispatch('fetchGet', {
-          url: 'request/',
-          headers: {
-            Authorization: `Bearer ${getters.USER_AUTH.token}`,
-          },
+          url: 'requests/history',
+        })
+        if (response.success) {
+          commit('SET_HISTORY_LIST', response.requests)
+        }
+        if(response.message) {
+          commit('SET_MSG', response.message)
+        }
+      } catch (e) {
+        commit('SET_ERROR', e)
+        throw e
+      }
+    },
+    async getRequests({ commit, getters, dispatch }) {
+      try {
+        const response = await dispatch('fetchGet', {
+          url: 'requests/',
         })
         if (response.success) {
           commit('SET_REQUEST_LIST', response.requests)
         }
-        return response.request
+        if(response.message) {
+          commit('SET_MSG', response.message)
+        }
       } catch (e) {
         commit('SET_ERROR', e)
         throw e
@@ -58,7 +72,6 @@ export default {
         throw e
       }
     },
-
     async updateRequestById({ commit, dispatch, getters }, {requestId, dataObject}) {
       try {
         const response = await dispatch('fetchPut', {
@@ -80,7 +93,6 @@ export default {
         throw e
       }
     },
-
     async getRequestById({ commit, dispatch, getters }, id) {
       try {
         const response = await dispatch('fetchGet', {

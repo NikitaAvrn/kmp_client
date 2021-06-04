@@ -1,7 +1,7 @@
 <template>
   <div class="card white">
     <div class="card-content black-text">
-      <span class="card-title">№{{ bol.number }}</span>
+      <span class="card-title">{{ bol.number }}</span>
       <p v-show="bol.container"><span class="grey-text">Контейнер:</span> {{ bol.container }}</p>
       <p v-show="bol.seal"><span class="grey-text">Пломба:</span> {{ bol.seal }}</p>
       <p><span class="grey-text">Вес:</span> {{ bol.weight }}</p>

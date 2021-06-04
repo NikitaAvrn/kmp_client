@@ -2,7 +2,7 @@
   <div>
     <ul class="sidenav" id="slide-out" ref="sidebar">
       <router-link v-for="link in links" :key="link.url" tag="li" :to="link.url" active-class="active" :exact="link.exact">
-        <a href="#" class="waves-effect pointer"
+        <a href="#" class="waves-effect pointer" @click="sidebar.close()"
           ><i class="material-icons">{{ link.icon }}</i
           >{{ link.title }}</a
         >

@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import { email, required, minLength } from 'vuelidate/lib/validators'
 
 export default {
@@ -51,6 +51,9 @@ export default {
   validations: {
     email: { email, required },
     password: { required, minLength: minLength(6) },
+  },
+  computed: {
+    ...mapGetters(['USER', 'SID'])
   },
   methods: {
     ...mapActions(['login']),
@@ -67,8 +70,8 @@ export default {
 
       const response = await this.login(formData)
 
-      if (response) {
-        this.$router.push('/delivery-request-list')
+      if (this.SID) {
+        this.$router.push('/')
       }
     },
   },

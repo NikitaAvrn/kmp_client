@@ -176,6 +176,12 @@ textarea.materialize-textarea:focus:not([readonly]) + label {
 .input-field .prefix.active {
   color: #8e9efd;
 }
+[type="radio"]:checked+span:after, [type="radio"].with-gap:checked+span:after {
+  background-color: #8e9efd;
+}
+[type="radio"]:checked+span:after, [type="radio"].with-gap:checked+span:before, [type="radio"].with-gap:checked+span:after {
+  border: 2px solid #8e9efd;
+}
 .dropdown-content li > a,
 .dropdown-content li > span {
   color: #8e9efd;

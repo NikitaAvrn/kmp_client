@@ -16,7 +16,7 @@
       <ul class="right hide-on-small-and-down">
         <li>
           <a class="dropdown-trigger white-text" href="#" data-target="dropdown" ref="dropdown">
-            <span>Никита Николаевич</span>
+            <span>{{ this.USER.name }} {{ this.USER.secondname }}</span>
             <i class="material-icons right">person</i>
           </a>
 
@@ -40,12 +40,14 @@
 
 <script>
 import menu from '@/data/menu.json'
+import { mapGetters } from 'vuex'
 
 export default {
   data: () => ({
     links: menu,
     dropdown: null,
   }),
+  computed: mapGetters(['USER']),
   mounted() {
     this.dropdown = M.Dropdown.init(this.$refs.dropdown, {})
   },

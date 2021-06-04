@@ -22,7 +22,7 @@
 export default {
   computed: {
     color() {
-      const r = Math.round(Math.random() * 3)
+      const r = Math.round(Math.random() * 4)
       const colors = ['red', 'green', 'blue', 'yellow']
       return 'spinner-' + colors[r] + '-only'
     },
