@@ -22,14 +22,17 @@
 
           <ul id="dropdown" class="dropdown-content">
             <li>
-              <a href="#" class="black-text"><i class="material-icons">supervisor_account</i>Пользователи </a>
+              <!-- <a href="#" class="black-text"><i class="material-icons">supervisor_account</i>Пользователи </a> -->
+              <router-link tag="a" class="black-text" to="/users"><i class="material-icons">supervisor_account</i>Пользователи</router-link>
             </li>
             <li>
-              <a href="#" class="black-text"><i class="material-icons">build</i>Настройки </a>
+              <!-- <a href="#" class="black-text"><i class="material-icons">build</i>Настройки </a> -->
+              <router-link tag="a" class="black-text" to="/settings"><i class="material-icons">build</i>Настройки</router-link>
             </li>
             <li class="divider" tabindex="-1"></li>
             <li>
-              <a href="#" class="black-text"><i class="material-icons">logout</i>Выйти </a>
+              <router-link tag="a" class="black-text" to="/login"><i class="material-icons">logout</i>Выйти</router-link>
+              <!-- <a href="#" class="black-text" @click.prevent="logout"><i class="material-icons">logout</i>Выйти </a> -->
             </li>
           </ul>
         </li>
@@ -49,12 +52,19 @@ export default {
   }),
   computed: mapGetters(['USER']),
   mounted() {
-    this.dropdown = M.Dropdown.init(this.$refs.dropdown, {})
+    this.dropdown = M.Dropdown.init(this.$refs.dropdown, {
+      constrainWidth: false,
+    })
   },
   beforeDestroy() {
     if (this.dropdown && this.dropdown.destroy) {
       this.dropdown.destroy()
     }
+  },
+  methods: {
+    logout() {
+      this.$router.push('/login')
+    },
   },
 }
 </script>

@@ -4,7 +4,7 @@
       <h3>{{ $route.name }}</h3>
     </div>
     <!-- РКДВ, РШ, ВКЛ, ВЛЛ -->
-    <loading v-if="!REQUEST_LIST" />
+    <loading v-if="loading" />
     <div v-else>
       <div class="row" v-for="(block, index) in req" :key="index">
         <div class="col s12 m4" v-for="request in block" :key="request.number">
@@ -37,8 +37,13 @@ export default {
       return utils.arrayCardTransform(this.REQUEST_LIST, 3)
     },
   },
-  mounted() {
-    this.getRequests()
+  data: () => ({
+    loading: false,
+  }),
+  async mounted() {
+    this.loading = true
+    await this.getRequests()
+    this.loading = false
   },
   methods: {
     ...mapActions(['getRequests']),

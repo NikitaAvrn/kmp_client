@@ -4,7 +4,7 @@
       <span class="card-title">{{ bol.number }}</span>
       <p v-show="bol.container"><span class="grey-text">Контейнер:</span> {{ bol.container }}</p>
       <p v-show="bol.seal"><span class="grey-text">Пломба:</span> {{ bol.seal }}</p>
-      <p><span class="grey-text">Вес:</span> {{ bol.weight }}</p>
+      <p><span class="grey-text">Вес:</span> {{ bol.weight | decimal }}</p>
       <p v-show="bol.iso"><span class="grey-text">ISO:</span> {{ bol.iso }}</p>
       <p v-show="bol.size"><span class="grey-text">Типоразмер:</span> {{ bol.size }}</p>
       <p v-show="bol.temperature"><span class="grey-text">Температура:</span> {{ bol.temperature }}˚C</p>
@@ -18,10 +18,10 @@
       <p><span class="grey-text">Груз:</span> {{ bol.cargo }}</p>
       <p><span class="grey-text">Тип перевозки:</span> {{ bol.type }}</p>
       <p v-show="bol.reil"><span class="grey-text">Ж/д накладная:</span> {{ bol.reil }}</p>
-      <p>
+      <p v-show="bol.request">
         <span class="grey-text">Заявка:</span> {{ bol.request }} <small>от {{ bol.requestDate }}</small>
       </p>
-      <p>
+      <p v-show="bol.invoice">
         <span class="grey-text">Счет:</span> {{ bol.invoice }} <small>от {{ bol.invoiceDate }}</small>
       </p>
     </div>

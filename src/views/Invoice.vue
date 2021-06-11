@@ -3,7 +3,7 @@
     <div class="page-title">
       <h3>{{ $route.name }}</h3>
     </div>
-    <loading v-if="!INVOICE_LIST.length" />
+    <loading v-if="loading" />
     <div v-else>
       <div class="row" v-for="(block, index) in inv" :key="index">
         <div class="col s12 m4" v-for="invoice in block" :key="invoice.number">
@@ -28,12 +28,17 @@ export default {
       return utils.arrayCardTransform(this.INVOICE_LIST, 3)
     },
   },
-  mounted() {
-    this.getInvoices()
+  data: () => ({
+    loading: false,
+  }),
+  async mounted() {
+    this.loading = true
+    await this.getInvoices()
+    this.loading = false
   },
   methods: {
-    ...mapActions(['getInvoices'])
-  }
+    ...mapActions(['getInvoices']),
+  },
 }
 </script>
 

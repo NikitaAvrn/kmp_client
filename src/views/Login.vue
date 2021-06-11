@@ -25,7 +25,7 @@
               </div>
             </div>
             <div class="card-action">
-              <div>
+              <div class="center">
                 <button class="btn waves-effect waves-light indigo darken-1 auth-submit" type="submit">
                   Войти
                   <i class="material-icons right">send</i>
@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { email, required, minLength } from 'vuelidate/lib/validators'
 
 export default {
@@ -53,10 +53,15 @@ export default {
     password: { required, minLength: minLength(6) },
   },
   computed: {
-    ...mapGetters(['USER', 'SID'])
+    ...mapGetters(['USER', 'SID', 'LOGIN']),
+  },
+  mounted() {
+    this.CLR_SID()
+    this.CLR_USER()
   },
   methods: {
     ...mapActions(['login']),
+    ...mapMutations(['CLR_SID', 'CLR_USER']),
     async submitHandler() {
       if (this.$v.$invalid) {
         this.$v.$touch()
@@ -69,8 +74,7 @@ export default {
       }
 
       const response = await this.login(formData)
-
-      if (this.SID) {
+      if (this.LOGIN) {
         this.$router.push('/')
       }
     },

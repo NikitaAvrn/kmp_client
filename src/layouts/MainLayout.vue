@@ -6,7 +6,7 @@
     <filterbar />
 
     <main class="app-content">
-      <div class="app-page" :class="{container: !is_mobile}">
+      <div class="app-page" :class="{ container: !is_mobile }">
         <router-view></router-view>
       </div>
     </main>
@@ -25,10 +25,10 @@ export default {
   components: { Sidebar, Navbar, Filterbar, Footbar },
   computed: {
     is_mobile() {
-      const isMobile = window.matchMedia("only screen and (max-width: 760px)")
+      const isMobile = window.matchMedia('only screen and (max-width: 760px)')
       return isMobile.matches ? true : false
-    }    
-  }
+    },
+  },
 }
 </script>
 

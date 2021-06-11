@@ -2,22 +2,24 @@ export default {
   state: {
     requests: [],
     history: [],
-    requestProccessing: null
+    requestProccessing: null,
   },
   getters: {
     REQUEST_LIST: (s) => s.requests,
     HISTORY_LIST: (s) => s.history,
-    REQUEST_PROCCESSING: (s) => s.requestProccessing
+    REQUEST_PROCCESSING: (s) => s.requestProccessing,
   },
   mutations: {
     SET_REQUEST_LIST: (s, l) => (s.requests = l),
     SET_HISTORY_LIST: (s, l) => (s.history = l),
     CLR_REQUEST_LIST: (s) => (s.requests = []),
     DEL_REQUEST: (s, req) => {
-      let index = s.requests.findIndex(request => req._id === request._id)
+      let index = s.requests.findIndex((request) => req._id === request._id)
       s.requests.splice(index, 1)
     },
-    SET_REQUEST_PROCCESSING: (s, rp) => { s.requestProccessing = rp }
+    SET_REQUEST_PROCCESSING: (s, rp) => {
+      s.requestProccessing = rp
+    },
   },
   actions: {
     async getHistoryRequests({ commit, getters, dispatch }) {
@@ -28,7 +30,7 @@ export default {
         if (response.success) {
           commit('SET_HISTORY_LIST', response.requests)
         }
-        if(response.message) {
+        if (response.message) {
           commit('SET_MSG', response.message)
         }
       } catch (e) {
@@ -44,7 +46,7 @@ export default {
         if (response.success) {
           commit('SET_REQUEST_LIST', response.requests)
         }
-        if(response.message) {
+        if (response.message) {
           commit('SET_MSG', response.message)
         }
       } catch (e) {
@@ -72,7 +74,7 @@ export default {
         throw e
       }
     },
-    async updateRequestById({ commit, dispatch, getters }, {requestId, dataObject}) {
+    async updateRequestById({ commit, dispatch, getters }, { requestId, dataObject }) {
       try {
         const response = await dispatch('fetchPut', {
           url: `request/${requestId}`,

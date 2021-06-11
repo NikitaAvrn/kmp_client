@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '../store'
+import { mapActions, mapGetters } from 'vuex'
 
 Vue.use(VueRouter)
 
@@ -55,10 +56,10 @@ const routes = [
     component: () => import('../views/Users.vue'),
   },
   {
-    path: '/options',
+    path: '/settings',
     name: 'Настройки',
     meta: { layout: 'main', auth: true },
-    component: () => import('../views/Options.vue'),
+    component: () => import('../views/Settings.vue'),
   },
   {
     path: '/login',
@@ -68,7 +69,7 @@ const routes = [
   },
   {
     path: '/logout',
-    name: 'Авторизация',
+    name: 'Выход',
     meta: { layout: 'empty' },
     component: () => import('../views/Logout.vue'),
   },
@@ -79,16 +80,19 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
 })
-/* 
+
 router.beforeEach(async (to, from, next) => {
   const requireAuth = to.matched.some((record) => record.meta.auth)
-  const isLogin = await store.dispatch('getIsLoginUser')
 
-  if (requireAuth && !isLogin) {
+  if (requireAuth) {
+    await store.dispatch('checkLogin')
+  }
+
+  if (requireAuth && !store.getters.LOGIN) {
     next('/login?message=login')
   } else {
     next()
   }
-}) */
+})
 
 export default router

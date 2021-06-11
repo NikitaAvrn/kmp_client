@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.7d8fd97c8b86ad4f74e170444dcf2a0e.js"
+  "/precache-manifest.8f1cb594ab494dc06b64e5117750a404.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "kmp_client"});

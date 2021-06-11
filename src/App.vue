@@ -14,7 +14,7 @@ import messages from '@/utils/messages'
 
 export default {
   computed: {
-    ...mapGetters(['ERROR', 'MSG']),
+    ...mapGetters(['ERROR', 'MSG', 'STATUS']),
     layout() {
       return (this.$route.meta.layout || 'empty') + '-layout'
     },
@@ -25,6 +25,11 @@ export default {
     },
   },
   watch: {
+    STATUS() {
+      /* if (this.STATUS == 401) {
+        this.$router.push('/login')
+      } */
+    },
     ERROR(e) {
       if (e.errors && e.errors.length) {
         e.errors.forEach((err) => {

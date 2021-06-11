@@ -12,6 +12,7 @@ import upperCaseDirective from '@/directives/uppercase.directive'
 import messagePlugin from '@/utils/message.plugin'
 import dateFilter from '@/filters/date.filter'
 import currencyFilter from '@/filters/currency.filter'
+import decimalFilter from '@/filters/decimal.filter'
 import 'materialize-css/dist/js/materialize.min'
 import './registerServiceWorker'
 
@@ -28,6 +29,7 @@ Vue.directive('uppercase', upperCaseDirective)
 Vue.directive('mask', VueMaskDirective)
 
 Vue.filter('date', dateFilter)
+Vue.filter('decimal', decimalFilter)
 Vue.filter('currency', currencyFilter)
 
 new Vue({

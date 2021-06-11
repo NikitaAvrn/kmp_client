@@ -4,6 +4,7 @@ import request from './modules/request'
 import invoice from './modules/invoice'
 import manifest from './modules/manifest'
 import auth from './modules/auth'
+import settings from './modules/settings'
 import config from './config.json'
 
 Vue.use(Vuex)
@@ -12,16 +13,20 @@ export default new Vuex.Store({
   state: {
     error: null,
     msg: null,
+    status: 0,
   },
   mutations: {
     SET_ERROR: (s, e) => (s.error = e),
     CLR_ERROR: (s) => (s.error = null),
     SET_MSG: (s, m) => (s.msg = m),
     CLR_MSG: (s) => (s.msg = null),
+    SET_STATUS: (s, st) => (s.status = st),
+    CLR_STATUS: (s) => (s.status = 0),
   },
   getters: {
     ERROR: (s) => s.error,
     MSG: (s) => s.msg,
+    STATUS: (s) => s.status,
   },
   actions: {
     async fetchPost({ commit }, { url, headers, rBody }) {
@@ -35,6 +40,7 @@ export default new Vuex.Store({
           },
           body: JSON.stringify(rBody),
         }).then((r) => {
+          commit('SET_STATUS', r.status)
           return r.json()
         })
       } catch (e) {
@@ -53,6 +59,7 @@ export default new Vuex.Store({
           },
           body: JSON.stringify(rBody),
         }).then((r) => {
+          commit('SET_STATUS', r.status)
           return r.json()
         })
       } catch (e) {
@@ -71,6 +78,7 @@ export default new Vuex.Store({
           },
           body: JSON.stringify(rBody),
         }).then((r) => {
+          commit('SET_STATUS', r.status)
           return r.json()
         })
       } catch (e) {
@@ -78,15 +86,18 @@ export default new Vuex.Store({
         throw e
       }
     },
-    async fetchGet({ commit }, { url, headers }) {
+    async fetchGet({ commit, getters }, { url }) {
       try {
         return await fetch(`${config.server}` + url, {
           method: 'GET',
           mode: 'cors',
           headers: {
-            'Content-Type': 'application/json; charset=utf-8',
+            'Content-Type': 'application/json; charset=utf-8; CISID=' + getters.SID,
+            //'Set-Cookie': `CISID=${getters.SID}`,
+            //Authorization: `Basic ${window.btoa(getters.SID)}`,
           },
         }).then((r) => {
+          commit('SET_STATUS', r.status)
           return r.json()
         })
       } catch (e) {
@@ -104,6 +115,7 @@ export default new Vuex.Store({
             'Content-Type': 'application/json; charset=utf-8',
           },
         }).then((r) => {
+          commit('SET_STATUS', r.status)
           return r.json()
         })
       } catch (e) {
@@ -116,6 +128,7 @@ export default new Vuex.Store({
     request,
     invoice,
     manifest,
-    auth
+    auth,
+    settings,
   },
 })
