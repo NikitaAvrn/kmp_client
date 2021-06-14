@@ -1,9 +1,8 @@
 <template>
   <div class="app-main-layout">
     <navbar />
-
     <sidebar />
-    <filterbar />
+    <!-- <filterbar /> -->
 
     <main class="app-content">
       <div class="app-page" :class="{ container: !is_mobile }">
@@ -18,15 +17,15 @@
 <script>
 import Navbar from '@/components/app/Navbar'
 import Sidebar from '@/components/app/Sidebar'
-import Filterbar from '../components/app/Filterbar.vue'
-import Footbar from '../components/app/Footbar.vue'
+import Filterbar from '@/components/app/Filterbar'
+import Footbar from '@/components/app/Footbar'
+import utils from '@/utils/utils'
 
 export default {
   components: { Sidebar, Navbar, Filterbar, Footbar },
   computed: {
     is_mobile() {
-      const isMobile = window.matchMedia('only screen and (max-width: 760px)')
-      return isMobile.matches ? true : false
+      return utils.isMobile()
     },
   },
 }

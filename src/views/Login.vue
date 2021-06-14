@@ -26,7 +26,7 @@
             </div>
             <div class="card-action">
               <div class="center">
-                <button class="btn waves-effect waves-light indigo darken-1 auth-submit" type="submit">
+                <button class="btn waves-effect waves-light blue darken-3 auth-submit" type="submit">
                   Войти
                   <i class="material-icons right">send</i>
                 </button>

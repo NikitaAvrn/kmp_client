@@ -17,7 +17,7 @@ export default {
     async getSessions({ commit, dispatch }) {
       try {
         const response = await dispatch('fetchGet', {
-          url: 'settings/user/sessions/',
+          url: 'settings/sessions/',
         })
         if (response.success) {
           commit('SET_SESSION_LIST', response.sessions)
