@@ -30,5 +30,21 @@ export default {
         throw e
       }
     },
+    async deleteSessionById({ commit, dispatch }, { sessionId }) {
+      try {
+        const response = await dispatch('fetchDelete', {
+          url: `settings/session/${sessionId}/close`,
+        })
+        if (response.success) {
+          commit('SET_SESSION_LIST', response.session)
+        }
+        if (response.message) {
+          commit('SET_MSG', response.message)
+        }
+      } catch (e) {
+        commit('SET_ERROR', e)
+        throw e
+      }
+    },
   },
 }

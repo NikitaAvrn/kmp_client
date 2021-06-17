@@ -5,7 +5,7 @@
         <img src="../../assets/logo/kasco_logo.svg" style="padding-left: 1rem; padding-top: .5rem; padding-bottom: .25rem; height: 56px;" alt="kasco_logo" srcset="" />
       </a>
       <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-      <a href="#" data-target="filter-out" class="sidenav-trigger right"><i class="material-icons">landscape</i></a>
+      <a href="#modal1" class="sidenav-trigger modal-trigger right"><i class="fas fa-filter"></i></a>
       <ul id="nav-mobile" class="hide-on-med-and-down">
         <router-link v-for="link in links" :key="link.url" tag="li" :to="link.url" active-class="active" :exact="link.exact">
           <a href="#">

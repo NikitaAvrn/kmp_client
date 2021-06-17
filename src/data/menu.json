@@ -44,7 +44,7 @@
     "hideTitle": true
   },
   {
-    "url": "/options",
+    "url": "/settings",
     "icon": "build",
     "title": "Настройки",
     "tooltip": "Список пользователей программы и их прав доступа",
