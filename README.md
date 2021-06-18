@@ -1,4 +1,4 @@
-# iot
+# kmp client
 
 ## Project setup
 ```
