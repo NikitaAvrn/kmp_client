@@ -105,7 +105,7 @@ export default new Vuex.Store({
         throw e
       }
     },
-    async fetchDelete({ commit }, { url, headers }) {
+    async fetchDelete({ commit }, { url, headers, rBody }) {
       try {
         return await fetch(`${config.server}` + url, {
           method: 'DELETE',
@@ -114,6 +114,7 @@ export default new Vuex.Store({
             ...headers,
             'Content-Type': 'application/json; charset=utf-8',
           },
+          body: JSON.stringify(rBody),
         }).then((r) => {
           commit('SET_STATUS', r.status)
           return r.json()

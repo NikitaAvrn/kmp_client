@@ -15,7 +15,8 @@
         <p>A bunch of text</p>
       </div>
       <div class="modal-footer">
-        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+        <a href="#!" class="modal-close waves-effect waves-red btn-flat">Отмена</a>
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Применить</a>
       </div>
     </div>
 

@@ -8,8 +8,8 @@ export default {
   mutations: {
     SET_SESSION_LIST: (s, l) => (s.sessions = l),
     CLR_SESSION_LIST: (s) => (s.sessions = []),
-    DEL_SESSION: (s, req) => {
-      let index = s.sessions.findIndex((sessions) => req._id === sessions._id)
+    DEL_SESSION: (s, session) => {
+      let index = s.sessions.findIndex((element) => session.sid === element.sid)
       s.sessions.splice(index, 1)
     },
   },
@@ -30,13 +30,16 @@ export default {
         throw e
       }
     },
-    async deleteSessionById({ commit, dispatch }, { sessionId }) {
+    async deleteSessionBySid({ commit, dispatch }, { sessionId }) {
       try {
         const response = await dispatch('fetchDelete', {
-          url: `settings/session/${sessionId}/close`,
+          url: 'settings/session/close',
+          rBody: {
+            sid: sessionId
+          }
         })
         if (response.success) {
-          commit('SET_SESSION_LIST', response.session)
+          commit('DEL_SESSION', response.session)
         }
         if (response.message) {
           commit('SET_MSG', response.message)
