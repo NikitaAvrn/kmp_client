@@ -6,14 +6,20 @@
           <th class="hide-on-med-and-down">Дата, время</th>
           <th>ОС</th>
           <th>Браузер</th>
+          <th class="hide-on-med-and-down">IP</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="session in SESSION_LIST" :key="session.sid">
           <td class="hide-on-med-and-down">{{ session.datetime }}</td>
-          <td><span class=""><i class="fab" :class="getIconOS(session)"></i></span>&nbsp;<span class="hide-on-med-and-down">{{ session.OS }} {{ session.OSVersion }}</span></td>
-          <td><span class=""><i class="fab" :class="getIconBrowzer(session)"></i></span>&nbsp;<span class="hide-on-med-and-down">{{ session.browser }}</span> {{ session.browserVersion }}</td>
+          <td>
+            <span class=""><i class="fab" :class="getIconOS(session)"></i></span>&nbsp;<span class="hide-on-med-and-down">{{ session.OS }} {{ session.OSVersion }}</span>
+          </td>
+          <td>
+            <span class=""><i class="fab" :class="getIconBrowzer(session)"></i></span>&nbsp;<span class="hide-on-med-and-down">{{ session.browser }}</span> {{ session.browserVersion }}
+          </td>
+          <td>{{ session.ip }}</td>
           <td>
             <a href="#!" class="btn waves-effect white blue-text text-darken-3" v-if="session.sid != SID" @click="closeSession(session)"><i class="material-icons">exit_to_app</i></a>
           </td>
@@ -38,7 +44,7 @@ export default {
     ...mapActions(['getSessions', 'deleteSessionBySid']),
     getIconOS(obj) {
       let icon
-      switch(obj.OS) {
+      switch (obj.OS) {
         case 'Windows':
           icon = 'windows'
           break
@@ -64,7 +70,7 @@ export default {
     },
     getIconBrowzer(obj) {
       let icon
-      switch(obj.browser) {
+      switch (obj.browser) {
         case 'Mozilla Firefox':
           icon = 'firefox-browser'
           break
@@ -90,14 +96,12 @@ export default {
     },
     closeSession(event) {
       this.deleteSessionBySid({ sessionId: event.sid })
-    }
+    },
   },
   mounted() {
     this.getSessions()
-  }
+  },
 }
 </script>
 
-<style>
-
-</style>
+<style></style>

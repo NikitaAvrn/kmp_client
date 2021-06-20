@@ -12,11 +12,11 @@
       </li>
       <li>
         <div class="collapsible-header"><i class="material-icons">color_lens</i>Цветовая тема</div>
-        <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+        <div class="collapsible-body"><span>В разработке</span></div>
       </li>
       <li>
         <div class="collapsible-header"><i class="material-icons">mode_comment</i>Подсказки</div>
-        <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+        <div class="collapsible-body"><span>В разработке</span></div>
       </li>
     </ul>
   </div>

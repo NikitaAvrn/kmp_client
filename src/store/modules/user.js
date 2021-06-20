@@ -1,49 +1,26 @@
 export default {
   state: {
-    userData: null,
-    isUserLogin: false,
+    users: [],
   },
   getters: {
-    USER_DATA: (s) => s.userData,
-    IS_USER_LOGIN: (s) => s.isUserLogin,
+    USER_LIST: (s) => s.users,
   },
   mutations: {
-    SET_USER_DATA: (s, d) => (s.userData = d),
-    CLR_USER_DATA: (s) => (s.userData = null),
-    SET_IS_USER_LOGIN: (s, l) => (s.isUserLogin = l),
-    CLR_IS_USER_LOGIN: (s) => (s.isUserLogin = true),
+    SET_USER_LIST: (s, u) => (s.users = u),
+    CLR_USER_LIST: (s) => (s.users = []),
   },
   actions: {
-    async getUserData({ commit, dispatch, getters }) {
+    async getUsers({ commit, dispatch }) {
       try {
         const response = await dispatch('fetchGet', {
-          url: 'user/user-data',
-          headers: {
-            Authorization: `Bearer ${getters.USER_AUTH.token}`,
-          },
+          url: 'users/',
         })
         if (response.success) {
-          commit('SET_USER_DATA', response.user)
+          commit('SET_USER_LIST', response.users)
         }
-        return response.success
-      } catch (e) {
-        commit('SET_ERROR', e)
-        throw e
-      }
-    },
-
-    async getIsLoginUser({ commit, dispatch, getters }) {
-      try {
-        if (!getters.USER_AUTH) {
-          return false
+        if (response.message) {
+          commit('SET_MSG', response.message)
         }
-        const response = await dispatch('fetchGet', {
-          url: 'user/user-login',
-          headers: {
-            Authorization: `Bearer ${getters.USER_AUTH.token}`,
-          },
-        })
-        return response.success
       } catch (e) {
         commit('SET_ERROR', e)
         throw e
