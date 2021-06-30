@@ -1,10 +1,17 @@
 <template>
   <div>
-    <div class="page-title">
+    <div class="page-title hide-on-large-only">
       <h3>{{ $route.name }}</h3>
     </div>
     <loading v-if="loading" />
     <div v-else>
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">search</i>
+          <input id="icon_prefix" type="text" class="validate">
+          <label for="icon_prefix">Поиск по счетам</label>
+        </div>
+      </div>
       <div class="row" v-for="(block, index) in inv" :key="index">
         <div class="col s12 m4" v-for="invoice in block" :key="invoice.number">
           <card-invoice :invoice="invoice" />

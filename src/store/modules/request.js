@@ -95,19 +95,13 @@ export default {
         throw e
       }
     },
-    async getRequestById({ commit, dispatch, getters }, id) {
+    async getRequestByNumber({ commit, dispatch, getters }, id) {
       try {
         const response = await dispatch('fetchGet', {
-          url: `request/${id}`,
-          headers: {
-            Authorization: `Bearer ${getters.USER_AUTH.token}`,
-          },
+          url: `request&number=${id}`,
         })
         if (response.success) {
           commit('SET_REQUEST_PROCCESSING', response.request)
-          return response.request
-        } else {
-          return false
         }
       } catch (e) {
         commit('SET_ERROR', e)

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="page-title">
+    <div class="page-title hide-on-large-only">
       <h3>{{ $route.name }}</h3>
     </div>
 
@@ -15,12 +15,15 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="user in USER_LIST" :key="user.code">
-          <td>{{ user.surname }} {{ user.name }} {{ user.secondname }}</td>
+        <tr v-for="user in userList" :key="user.code">
+          <td :class="{ 'grey-text': !user.activated }">{{ user.surname }} {{ user.name }} {{ user.secondname }}</td>
           <td class="hide-on-med-and-down">{{ user.email }}</td>
           <td class="hide-on-med-and-down"></td>
           <td class="hide-on-med-and-down">{{ user.post }}</td>
-          <td></td>
+          <td nowrap>
+            <a href="#!" class="btn waves-effect white" :class="{ 'blue-text text-darken-3': user.activated, 'grey-text': !user.activated }"><i class="material-icons">edit</i></a>
+            <a href="#!" class="btn waves-effect white hide-on-med-and-down" :class="{ 'blue-text text-darken-3': user.activated, 'grey-text': !user.activated }"><i class="material-icons">delete</i></a>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -45,6 +48,11 @@ export default {
     isMobile() {
       return utils.isMobile()
     },
+    userList() {
+      return this.USER_LIST.sort((a, b) => {
+        return b.activated - a.activated
+      })
+    }
   },
   methods: {
     ...mapActions(['getUsers']),
@@ -55,4 +63,8 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+  .btn {
+    margin-left: 0.5rem;
+  }
+</style>

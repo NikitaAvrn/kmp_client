@@ -10,9 +10,11 @@
 
 <script>
 import config from '@/store/config.json'
+import { mapGetters } from 'vuex'
 
 export default {
   props: ['minlength'],
+  computed: mapGetters(['SID']),
   data: () => ({
     ship: '',
     shipflight: null,
@@ -45,12 +47,12 @@ export default {
       if(this.ship.length < this.minlength) {
         return
       }
-
+      //todo
       let response = await fetch(`${config.server}directory/flight&query=${this.ship}`, {
         method: 'GET',
         mode: 'cors',
         headers: {
-          'Content-Type': 'application/json; charset=utf-8',
+          'Content-Type': 'application/json; charset=utf-8; CISID=' + this.SID,
         },
       })
       .then(r => r.json())

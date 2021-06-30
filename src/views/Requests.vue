@@ -1,11 +1,18 @@
 <template>
   <div>
-    <div class="page-title">
+    <div class="page-title hide-on-large-only">
       <h3>{{ $route.name }}</h3>
     </div>
     <!-- РКДВ, РШ, ВКЛ, ВЛЛ -->
     <loading v-if="loading" />
     <div v-else>
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">search</i>
+          <input id="icon_prefix" type="text" class="validate">
+          <label for="icon_prefix">Поиск по заявкам</label>
+        </div>
+      </div>
       <div class="row" v-for="(block, index) in req" :key="index">
         <div class="col s12 m4" v-for="request in block" :key="request.number">
           <card-request :request="request" />

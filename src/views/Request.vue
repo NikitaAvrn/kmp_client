@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="page-title">
+    <div class="page-title hide-on-large-only">
       <h3>{{ $route.name }}</h3>
     </div>
     <ul id="tabs-swipe-demo" class="tabs" ref="tabs">
@@ -57,7 +57,7 @@
             </p>
           </div>
         </div>
-        <hr />
+        <!-- <hr /> -->
         <div class="row">
           <div class="col s12 m6">
             <div class="row">
@@ -94,7 +94,7 @@
             </div>
           </div>
         </div>
-        <hr />
+        <!-- <hr /> -->
         <div class="row">
           <div class="col s12">
             <p>
@@ -147,7 +147,7 @@
             </div>
           </div>
         </div>
-        <hr />
+        <!-- <hr /> -->
         <div class="row">
           <div class="input-field col s12">
             <select ref="typeContainer">
@@ -250,7 +250,7 @@
             <label for="autocomplete-input">В порту назначения</label>
           </div>
         </div>
-        <hr />
+        <!-- <hr /> -->
         <div class="row">
           <div class="input-field col s12 m6">
             <input id="first_name" type="text" class="validate" />

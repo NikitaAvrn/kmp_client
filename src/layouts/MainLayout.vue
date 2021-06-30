@@ -2,13 +2,14 @@
   <div class="app-main-layout">
     <navbar />
     <sidebar />
-
+    <scroll-progress />
+    
     <main class="app-content">
       <div class="app-page" :class="{ container: !is_mobile }">
         <router-view></router-view>
       </div>
     </main>
-
+    
     <div id="modal1" class="modal bottom-sheet" ref="filter">
       <div class="modal-content">
         <h4>Modal Header</h4>
@@ -19,7 +20,6 @@
         <a href="#!" class="modal-close waves-effect waves-green btn-flat">Применить</a>
       </div>
     </div>
-
     <footbar />
   </div>
 </template>
@@ -30,16 +30,18 @@ import Sidebar from '@/components/app/Sidebar'
 import Filterbar from '@/components/app/Filterbar'
 import Footbar from '@/components/app/Footbar'
 import utils from '@/utils/utils'
+import ScrollProgress from '../components/app/ScrollProgress.vue'
 
 export default {
-  components: { Sidebar, Navbar, Filterbar, Footbar },
+  components: { Sidebar, Navbar, Filterbar, Footbar, ScrollProgress },
   computed: {
     is_mobile() {
       return utils.isMobile()
     },
   },
   data: () => ({
-    filter: null
+    filter: null,
+    scrollY: 0
   }),
   mounted() {
     this.filter = M.Modal.init(this.$refs.filter, { })
@@ -48,8 +50,10 @@ export default {
     if (this.filter && this.filter.destroy) {
       this.filter.destroy()
     }
-  }
+  },
 }
 </script>
 
-<style></style>
+<style>
+
+</style>

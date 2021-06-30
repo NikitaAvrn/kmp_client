@@ -1,15 +1,15 @@
 <template>
   <div>
-    <div class="page-title">
+    <div class="page-title hide-on-large-only">
       <h3>{{ $route.name }}</h3>
     </div>
     <div class="row">
-      <div class="col s12 m6 offset-m3">
+      <div class="col s12">
         <ship-flight minlength="3" @select-flight="selectFlight" />
       </div>
     </div>
     <div class="row" v-show="PORTS.length">
-      <div class="input-field col s12 m6 offset-m3">
+      <div class="input-field col s12">
         <i class="material-icons prefix">domain</i>
         <select multiple v-model="selectPort" ref="select">
           <option value="" disabled>Выберете порт назначения</option>
