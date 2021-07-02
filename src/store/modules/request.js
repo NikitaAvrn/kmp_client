@@ -20,6 +20,9 @@ export default {
     SET_REQUEST_PROCCESSING: (s, rp) => {
       s.requestProccessing = rp
     },
+    CLR_REQUEST_PROCCESSING: (s) => {
+      s.requestProccessing = null
+    },
   },
   actions: {
     async getHistoryRequests({ commit, getters, dispatch }) {
@@ -74,7 +77,7 @@ export default {
         throw e
       }
     },
-    async updateRequestById({ commit, dispatch, getters }, { requestId, dataObject }) {
+    async updateRequestByNumber({ commit, dispatch, getters }, { requestId, dataObject }) {
       try {
         const response = await dispatch('fetchPut', {
           url: `request/${requestId}`,
@@ -95,20 +98,24 @@ export default {
         throw e
       }
     },
-    async getRequestByNumber({ commit, dispatch, getters }, id) {
+    async getRequestByNumber({ commit, dispatch }, number) {
       try {
         const response = await dispatch('fetchGet', {
-          url: `request&number=${id}`,
+          url: `request&number=${number}`,
         })
         if (response.success) {
           commit('SET_REQUEST_PROCCESSING', response.request)
         }
+        if (response.message) {
+          commit('SET_MSG', response.message)
+        }
+        return response.success
       } catch (e) {
         commit('SET_ERROR', e)
         throw e
       }
     },
-    async deleteRequestById({ commit, dispatch, getters }, id) {
+    async deleteRequestByNumber({ commit, dispatch, getters }, id) {
       try {
         const response = await dispatch('fetchDelete', {
           url: `request/${id}`,
