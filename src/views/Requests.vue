@@ -9,7 +9,7 @@
       <div class="row">
         <div class="input-field col s12">
           <i class="material-icons prefix">search</i>
-          <input id="icon_prefix" type="text" class="validate">
+          <input id="icon_prefix" type="text" v-model.trim="findQuery" />
           <label for="icon_prefix">Поиск по заявкам</label>
         </div>
       </div>
@@ -41,11 +41,51 @@ export default {
   computed: {
     ...mapGetters(['REQUEST_LIST']),
     req() {
-      return utils.arrayCardTransform(this.REQUEST_LIST, 3)
+      let findArray = this.REQUEST_LIST.filter((card) => {
+        if (this.findQuery === '') return card
+        this.findQuery = this.findQuery.toLowerCase()
+        let findFlag = false
+
+        Object.keys(card).forEach((index) => {
+          if (
+            String(card[index])
+              .toLowerCase()
+              .includes(this.findQuery)
+          )
+            findFlag = true
+        })
+        if (!findFlag) {
+          card.documents.forEach((doc) => {
+            Object.keys(doc).forEach((index) => {
+              if (
+                String(doc[index])
+                  .toLowerCase()
+                  .includes(this.findQuery)
+              )
+                findFlag = true
+            })
+          })
+        }
+
+        if (!findFlag) {
+          Object.keys(card.invoice).forEach((index) => {
+            if (
+              String(card['invoice'][index])
+                .toLowerCase()
+                .includes(this.findQuery)
+            )
+              findFlag = true
+          })
+        }
+
+        if (findFlag) return card
+      })
+      return utils.arrayCardTransform(findArray, 3)
     },
   },
   data: () => ({
     loading: false,
+    findQuery: '',
   }),
   async mounted() {
     this.loading = true

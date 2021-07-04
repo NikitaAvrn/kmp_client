@@ -53,11 +53,7 @@
       </ul>
     </div>
     <div class="card-action">
-      <router-link
-        tag="a"
-        class="btn white black-text"
-        :to="'/request?number=' + this.request.number"
-      ><i class="material-icons left">edit</i>Редактировать</router-link>
+      <router-link tag="a" class="btn waves-effect white black-text" :to="'/request?number=' + this.request.number"><i class="material-icons left">edit</i>Редактировать</router-link>
     </div>
   </div>
 </template>

@@ -6,6 +6,7 @@ import manifest from './modules/manifest'
 import auth from './modules/auth'
 import settings from './modules/settings'
 import user from './modules/user'
+import directory from './modules/directory'
 import config from './config.json'
 
 Vue.use(Vuex)
@@ -133,5 +134,6 @@ export default new Vuex.Store({
     auth,
     settings,
     user,
+    directory,
   },
 })

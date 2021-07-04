@@ -67,12 +67,6 @@ const routes = [
     meta: { layout: 'empty' },
     component: () => import('../views/Login.vue'),
   },
-  {
-    path: '/logout',
-    name: 'Выход',
-    meta: { layout: 'empty' },
-    component: () => import('../views/Logout.vue'),
-  },
 ]
 
 const router = new VueRouter({
