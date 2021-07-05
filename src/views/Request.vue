@@ -41,13 +41,22 @@
 
 <script>
 import FormRequest from '../components/request/FormRequest.vue'
+import utils from '@/utils/utils'
+
 export default {
   components: { FormRequest },
+  computed: {
+    swipeable() {
+      return utils.isMobile()
+    }
+  },
   data: () => ({
     tabs: null
   }),
   mounted() {
-    this.tabs = M.Tabs.init(this.$refs.tabs, { swipeable: true });
+    this.tabs = M.Tabs.init(this.$refs.tabs, {
+      swipeable: this.swipeable
+    });
   },
   beforeDestroy() {
     if (this.tabs && this.tabs.destroy) {

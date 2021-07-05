@@ -14,12 +14,7 @@
       </div>
       <div class="row">
         <div class="col s12 m6">
-          <div class="row">
-            <div class="input-field col s12">
-              <input type="text" id="autocomplete-input" class="autocomplete" />
-              <label for="autocomplete-input">Грузоотправитель</label>
-            </div>
-          </div>
+          <client-autocomplete v-model="REQUEST_PROCCESSING.shipper" />
         </div>
         <div class="col s12 m6">
           <p>
@@ -256,10 +251,11 @@
 import { mapGetters, mapActions } from 'vuex'
 import Loading from '../app/Loading.vue'
 import MyClients from '../app/MyClients.vue'
+import ClientAutocomplete from '../ClientAutocomplete.vue'
 
 export default {
   props: ['number'],
-  components: { Loading, MyClients },
+  components: { Loading, MyClients, ClientAutocomplete },
   computed: {
     ...mapGetters(['REQUEST_PROCCESSING']),
   },
