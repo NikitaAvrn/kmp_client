@@ -53,7 +53,7 @@ export default {
     async getClientById({ commit, dispatch }, clientId) {
       try {
         const response = await dispatch('fetchGet', {
-          url: `directory/client/by/id/&id=${clienId}`,
+          url: `directory/client/by/id/&id=${clientId}`,
         })
         if (response.success) {
           commit('SET_CLIENT', response.client)

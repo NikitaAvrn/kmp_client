@@ -2,7 +2,6 @@
   <div>
     <loading v-if="!REQUEST_PROCCESSING" />
     <div v-else>
-      {{ REQUEST_PROCCESSING }}
       <div class="row">
         <div class="col s12 m6">
           <my-clients v-model="REQUEST_PROCCESSING.client" />
@@ -14,12 +13,12 @@
       </div>
       <div class="row">
         <div class="col s12 m6">
-          <client-autocomplete v-model="REQUEST_PROCCESSING.shipper" />
+          <client-autocomplete label="Грузоотправитель" v-model="REQUEST_PROCCESSING.shipper" ref="shipper" />
         </div>
         <div class="col s12 m6">
           <p>
             <label>
-              <input type="checkbox" />
+              <input type="checkbox" v-model="shipperAsClient" />
               <span>Клиент - грузоотправитель</span>
             </label>
           </p>
@@ -28,16 +27,15 @@
       <div class="row">
         <div class="col s12 m6">
           <div class="row">
-            <div class="input-field col s12">
-              <input type="text" id="autocomplete-input" class="autocomplete" />
-              <label for="autocomplete-input">Грузоотправитель</label>
+            <div class="col s12">
+              <client-autocomplete label="Грузополучатель" v-model="REQUEST_PROCCESSING.consignee" ref="consignee" />
             </div>
           </div>
         </div>
         <div class="col s12 m6">
           <p>
             <label>
-              <input type="checkbox" />
+              <input type="checkbox" v-model="consigneeAsClient" />
               <span>Клиент - грузополучатель</span>
             </label>
           </p>
@@ -258,6 +256,38 @@ export default {
   components: { Loading, MyClients, ClientAutocomplete },
   computed: {
     ...mapGetters(['REQUEST_PROCCESSING']),
+    shipperAsClient: {
+      get() {
+        if (this.REQUEST_PROCCESSING) {
+          if (this.REQUEST_PROCCESSING.shipper === this.REQUEST_PROCCESSING.client) {
+            return true
+          }
+        }
+        return false
+      },
+      set(value) {
+        if (value) {
+          this.REQUEST_PROCCESSING.shipper = this.REQUEST_PROCCESSING.client
+          this.$refs.shipper.updateText(this.REQUEST_PROCCESSING.client)
+        }
+      },
+    },
+    consigneeAsClient: {
+      get() {
+        if (this.REQUEST_PROCCESSING) {
+          if (this.REQUEST_PROCCESSING.consignee === this.REQUEST_PROCCESSING.client) {
+            return true
+          }
+        }
+        return false
+      },
+      set(value) {
+        if (value) {
+          this.REQUEST_PROCCESSING.consignee = this.REQUEST_PROCCESSING.client
+          this.$refs.consignee.updateText(this.REQUEST_PROCCESSING.client)
+        }
+      },
+    },
   },
   data: () => ({
     typeContainer: null,
@@ -266,6 +296,9 @@ export default {
   }),
   methods: {
     ...mapActions(['getRequestByNumber']),
+    asClient(el) {
+      this.REQUEST_PROCCESSING[el] = this.REQUEST_PROCCESSING.client
+    },
   },
   async mounted() {
     if (!(await this.getRequestByNumber(this.number))) {
