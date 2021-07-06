@@ -3,11 +3,19 @@ export default {
     myclients: [],
     clients: [],
     client: {},
+    ports: [],
+    port: {},
+    cargoes: [],
+    cargo: {}
   },
   getters: {
     MY_CLIENT_LIST: (s) => s.myclients,
     CLIENT_LIST: (s) => s.clients,
     CLIENT: (s) => s.client,
+    PORT_LIST: (s) => s.ports,
+    PORT: (s) => s.port,
+    CARGO_LIST: (s) => s.cargoes,
+    CARGO: (s) => s.cargo,
   },
   mutations: {
     SET_MY_CLIENT_LIST: (s, c) => (s.myclients = c),
@@ -16,6 +24,14 @@ export default {
     CLR_CLIENT_LIST: (s) => (s.clients = []),
     SET_CLIENT: (s, c) => (s.client = c),
     CLR_CLIENT: (s) => (s.client = {}),
+    SET_PORT_LIST: (s, p) => (s.ports = p),
+    CLR_PORT_LIST: (s) => (s.ports = []),
+    SET_PORT: (s, p) => (s.port = p),
+    CLR_PORT: (s) => (s.port = {}),
+    SET_CARGO_LIST: (s, c) => (s.cargoes = c),
+    CLR_CARGO_LIST: (s) => (s.cargoes = []),
+    SET_CARGO: (s, c) => (s.cargo = c),
+    CLR_CARGO: (s) => (s.cargo = {}),
   },
   actions: {
     async getMyClients({ commit, dispatch }) {
@@ -57,6 +73,70 @@ export default {
         })
         if (response.success) {
           commit('SET_CLIENT', response.client)
+        }
+        if (response.message) {
+          commit('SET_MSG', response.message)
+        }
+      } catch (e) {
+        commit('SET_ERROR', e)
+        throw e
+      }
+    },
+    async getFindPorts({ commit, dispatch }, portQuery) {
+      try {
+        const response = await dispatch('fetchGet', {
+          url: `directory/ports/find&query=${portQuery}`,
+        })
+        if (response.success) {
+          commit('SET_PORT_LIST', response.ports)
+        }
+        if (response.message) {
+          commit('SET_MSG', response.message)
+        }
+      } catch (e) {
+        commit('SET_ERROR', e)
+        throw e
+      }
+    },
+    async getPortById({ commit, dispatch }, portId) {
+      try {
+        const response = await dispatch('fetchGet', {
+          url: `directory/port/by/id/&id=${portId}`,
+        })
+        if (response.success) {
+          commit('SET_PORT', response.port)
+        }
+        if (response.message) {
+          commit('SET_MSG', response.message)
+        }
+      } catch (e) {
+        commit('SET_ERROR', e)
+        throw e
+      }
+    },
+    async getFindCargoes({ commit, dispatch }, cargoQuery) {
+      try {
+        const response = await dispatch('fetchGet', {
+          url: `directory/cargoes/find&query=${cargoQuery}`,
+        })
+        if (response.success) {
+          commit('SET_CARGO_LIST', response.cargoes)
+        }
+        if (response.message) {
+          commit('SET_MSG', response.message)
+        }
+      } catch (e) {
+        commit('SET_ERROR', e)
+        throw e
+      }
+    },
+    async getCargoById({ commit, dispatch }, cargoId) {
+      try {
+        const response = await dispatch('fetchGet', {
+          url: `directory/cargo/by/id/&id=${cargoId}`,
+        })
+        if (response.success) {
+          commit('SET_CARGO', response.cargo)
         }
         if (response.message) {
           commit('SET_MSG', response.message)

@@ -44,12 +44,7 @@
       <!-- <hr /> -->
       <div class="row">
         <div class="col s12 m6">
-          <div class="row">
-            <div class="input-field col s12">
-              <input type="text" id="autocomplete-input" class="autocomplete" />
-              <label for="autocomplete-input">Порт отправления</label>
-            </div>
-          </div>
+          <port-autocomplete label="Порт отправления" v-model="REQUEST_PROCCESSING.portDispatch" ref="portDispatch" />
         </div>
         <div class="col s12 m6">
           <div class="row">
@@ -62,12 +57,7 @@
       </div>
       <div class="row">
         <div class="col s12 m6">
-          <div class="row">
-            <div class="input-field col s12">
-              <input type="text" id="autocomplete-input" class="autocomplete" />
-              <label for="autocomplete-input">Порт назначения</label>
-            </div>
-          </div>
+          <port-autocomplete label="Порт назначения" v-model="REQUEST_PROCCESSING.portDestination" ref="portDestination" />
         </div>
         <div class="col s12 m6">
           <div class="row">
@@ -205,9 +195,8 @@
         </div>
       </div>
       <div class="row" v-show="REQUEST_PROCCESSING.cargoType < 4 && REQUEST_PROCCESSING.emptyReturning">
-        <div class="input-field col s12">
-          <input type="text" id="autocomplete-input" class="autocomplete" />
-          <label for="autocomplete-input">Порт назначения порожнего контейнера</label>
+        <div class="col s12">
+          <port-autocomplete label="Порт возврата порожнего" v-model="REQUEST_PROCCESSING.portReturn" ref="portReturn" />
         </div>
       </div>
       <div class="row" v-show="REQUEST_PROCCESSING.cargoType == 1">
@@ -222,19 +211,18 @@
       </div>
       <div class="row" v-show="REQUEST_PROCCESSING.cargoType == 1">
         <div class="input-field col s6 m6">
-          <input type="text" id="autocomplete-input" class="autocomplete" />
+          <input type="text" id="autocomplete-input" />
           <label for="autocomplete-input">В порту отправления</label>
         </div>
         <div class="input-field col s6 m6">
-          <input type="text" id="autocomplete-input" class="autocomplete" />
+          <input type="text" id="autocomplete-input" />
           <label for="autocomplete-input">В порту назначения</label>
         </div>
       </div>
       <!-- <hr /> -->
       <div class="row" v-show="REQUEST_PROCCESSING.cargoType < 4">
-        <div class="input-field col s12 m6">
-          <input id="cargoTitle" type="text" class="validate" />
-          <label for="cargoTitle">Груз</label>
+        <div class="col s12 m6">
+          <cargo-autocomplete label="Груз" v-model="REQUEST_PROCCESSING.cargo" ref="cargo" />
         </div>
         <div class="input-field col s12 m6">
           <input id="cargoTitleAdd" type="text" class="validate" />
@@ -249,11 +237,13 @@
 import { mapGetters, mapActions } from 'vuex'
 import Loading from '../app/Loading.vue'
 import MyClients from '../app/MyClients.vue'
+import CargoAutocomplete from '../CargoAutocomplete.vue'
 import ClientAutocomplete from '../ClientAutocomplete.vue'
+import PortAutocomplete from '../PortAutocomplete.vue'
 
 export default {
   props: ['number'],
-  components: { Loading, MyClients, ClientAutocomplete },
+  components: { Loading, MyClients, ClientAutocomplete, PortAutocomplete, CargoAutocomplete },
   computed: {
     ...mapGetters(['REQUEST_PROCCESSING']),
     shipperAsClient: {

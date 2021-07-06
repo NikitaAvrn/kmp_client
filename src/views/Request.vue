@@ -6,7 +6,7 @@
     <div class="row">
       <div class="col s12">
         <ul id="tabs-swipe" class="tabs" ref="tabs">
-          <li class="tab col s4"><a href="#form-request">Заявка</a></li>
+          <li class="tab col s4"><a href="#form-request">Заявка <span>№{{ $route.query.number }}<small></small></span></a></li>
           <li class="tab col s4"><a href="#documents">Коносаменты</a></li>
           <li class="tab col s4"><a href="#invoice">Счет</a></li>
         </ul>
