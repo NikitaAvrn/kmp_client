@@ -3,20 +3,15 @@
     <div class="card-content black-text">
       <span class="card-title">{{ document.document }}</span>
       <cargo-autocomplete label="Груз" v-model="document.cargo" ref="cargo" />
-      <container-autocomplete v-if="document.packaging = 60" label="Контейнер" v-model="document.container" />
+      <container-autocomplete v-if="(document.packaging = 60)" label="Контейнер" v-model="document.container" />
       <div class="row">
         <div class="input-field col s12">
           <input id="weight" type="text" v-model="document.weight" />
           <label for="weight">Вес груза</label>
         </div>
       </div>
-      <div class="row"  v-show="document.packaging != 60">
-        <div class="input-field col s12">
-          <input id="packaging" type="text" v-model.number="document.packaging" />
-          <label for="packaging">Упаковка</label>
-        </div>
-      </div>
-      <div class="row" v-show="document.packaging = 60">
+      <packaging-autocomplete label="Упаковка" v-show="document.packaging != 60" v-model="document.packaging" />
+      <div class="row" v-show="(document.packaging = 60)">
         <div class="input-field col s12">
           <input id="seal" type="text" v-model="document.seal" />
           <label for="seal">Пломба</label>
@@ -60,8 +55,9 @@
 <script>
 import CargoAutocomplete from './CargoAutocomplete.vue'
 import ContainerAutocomplete from './ContainerAutocomplete.vue'
+import PackagingAutocomplete from './PackagingAutocomplete.vue'
 export default {
-  components: { CargoAutocomplete, ContainerAutocomplete },
+  components: { CargoAutocomplete, ContainerAutocomplete, PackagingAutocomplete },
   props: ['document'],
   data: () => ({
     collapsible: null,

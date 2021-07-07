@@ -8,7 +8,9 @@ export default {
     cargoes: [],
     cargo: {},
     containers: [],
-    container: {}
+    container: {},
+    packagings: [],
+    packaging: {},
   },
   getters: {
     MY_CLIENT_LIST: (s) => s.myclients,
@@ -20,6 +22,8 @@ export default {
     CARGO: (s) => s.cargo,
     CONTAINER_LIST: (s) => s.containers,
     CONTAINER: (s) => s.container,
+    PACKAGING_LIST: (s) => s.packagings,
+    PACKAGING: (s) => s.packaging,
   },
   mutations: {
     SET_MY_CLIENT_LIST: (s, c) => (s.myclients = c),
@@ -40,6 +44,10 @@ export default {
     CLR_CONTAINER_LIST: (s) => (s.containers = []),
     SET_CONTAINER: (s, c) => (s.container = c),
     CLR_CONTAINER: (s) => (s.container = {}),
+    SET_PACKAGING_LIST: (s, p) => (s.packagings = p),
+    CLR_PACKAGING_LIST: (s) => (s.packagings = []),
+    SET_PACKAGING: (s, p) => (s.packaging = p),
+    CLR_PACKAGING: (s) => (s.packaging = {}),
   },
   actions: {
     async getMyClients({ commit, dispatch }) {
@@ -177,6 +185,38 @@ export default {
         })
         if (response.success) {
           commit('SET_CONTAINER', response.container)
+        }
+        if (response.message) {
+          commit('SET_MSG', response.message)
+        }
+      } catch (e) {
+        commit('SET_ERROR', e)
+        throw e
+      }
+    },
+    async getFindPackagings({ commit, dispatch }, packagingQuery) {
+      try {
+        const response = await dispatch('fetchGet', {
+          url: `directory/packaging/find&query=${packagingQuery}`,
+        })
+        if (response.success) {
+          commit('SET_PACKAGING_LIST', response.packaging)
+        }
+        if (response.message) {
+          commit('SET_MSG', response.message)
+        }
+      } catch (e) {
+        commit('SET_ERROR', e)
+        throw e
+      }
+    },
+    async getPackagingById({ commit, dispatch }, packagingId) {
+      try {
+        const response = await dispatch('fetchGet', {
+          url: `directory/packaging/by/id/&id=${packagingId}`,
+        })
+        if (response.success) {
+          commit('SET_PACKAGING', response.packaging)
         }
         if (response.message) {
           commit('SET_MSG', response.message)

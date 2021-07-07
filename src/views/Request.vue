@@ -6,7 +6,11 @@
     <div class="row">
       <div class="col s12">
         <ul id="tabs-swipe" class="tabs" ref="tabs">
-          <li class="tab col s4"><a href="#form-request">Заявка <span>№{{ $route.query.number }}<small></small></span></a></li>
+          <li class="tab col s4">
+            <a href="#form-request"
+              >Заявка <span>№{{ $route.query.number }}<small></small></span
+            ></a>
+          </li>
           <li class="tab col s4"><a href="#documents">Коносаменты</a></li>
           <li class="tab col s4"><a href="#invoice">Счет</a></li>
         </ul>
@@ -20,11 +24,7 @@
       <documents-request />
     </div>
     <div id="invoice" class="col s12">
-      <div class="row">
-        <div class="col s12">
-          Счет
-        </div>
-      </div>
+      <invoice-request />
     </div>
 
     <div class="fixed-action-btn">
@@ -40,31 +40,32 @@ import FormRequest from '../components/request/FormRequest.vue'
 import utils from '@/utils/utils'
 import DocumentsRequest from '../components/request/DocumentsRequest.vue'
 import { mapMutations } from 'vuex'
+import InvoiceRequest from '../components/request/InvoiceRequest.vue'
 
 export default {
-  components: { FormRequest, DocumentsRequest },
+  components: { FormRequest, DocumentsRequest, InvoiceRequest },
   computed: {
     swipeable() {
       return utils.isMobile()
-    }
+    },
   },
   data: () => ({
-    tabs: null
+    tabs: null,
   }),
   mounted() {
     this.tabs = M.Tabs.init(this.$refs.tabs, {
-      swipeable: this.swipeable
-    });
+      swipeable: this.swipeable,
+    })
     this.CLR_REQUEST_PROCCESSING()
   },
   beforeDestroy() {
     if (this.tabs && this.tabs.destroy) {
-      this.tabs.destroy();
+      this.tabs.destroy()
     }
   },
   methods: {
-    ...mapMutations(['CLR_REQUEST_PROCCESSING'])
-  }
+    ...mapMutations(['CLR_REQUEST_PROCCESSING']),
+  },
 }
 </script>
 
