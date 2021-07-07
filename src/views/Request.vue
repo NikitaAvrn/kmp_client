@@ -17,11 +17,7 @@
       <form-request :number="$route.query.number" />
     </div>
     <div id="documents" class="col s12">
-      <div class="row">
-        <div class="col s12">
-          Коносаменты
-        </div>
-      </div>
+      <documents-request />
     </div>
     <div id="invoice" class="col s12">
       <div class="row">
@@ -42,9 +38,11 @@
 <script>
 import FormRequest from '../components/request/FormRequest.vue'
 import utils from '@/utils/utils'
+import DocumentsRequest from '../components/request/DocumentsRequest.vue'
+import { mapMutations } from 'vuex'
 
 export default {
-  components: { FormRequest },
+  components: { FormRequest, DocumentsRequest },
   computed: {
     swipeable() {
       return utils.isMobile()
@@ -57,12 +55,16 @@ export default {
     this.tabs = M.Tabs.init(this.$refs.tabs, {
       swipeable: this.swipeable
     });
+    this.CLR_REQUEST_PROCCESSING()
   },
   beforeDestroy() {
     if (this.tabs && this.tabs.destroy) {
       this.tabs.destroy();
     }
   },
+  methods: {
+    ...mapMutations(['CLR_REQUEST_PROCCESSING'])
+  }
 }
 </script>
 

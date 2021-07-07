@@ -6,7 +6,9 @@ export default {
     ports: [],
     port: {},
     cargoes: [],
-    cargo: {}
+    cargo: {},
+    containers: [],
+    container: {}
   },
   getters: {
     MY_CLIENT_LIST: (s) => s.myclients,
@@ -16,6 +18,8 @@ export default {
     PORT: (s) => s.port,
     CARGO_LIST: (s) => s.cargoes,
     CARGO: (s) => s.cargo,
+    CONTAINER_LIST: (s) => s.containers,
+    CONTAINER: (s) => s.container,
   },
   mutations: {
     SET_MY_CLIENT_LIST: (s, c) => (s.myclients = c),
@@ -32,6 +36,10 @@ export default {
     CLR_CARGO_LIST: (s) => (s.cargoes = []),
     SET_CARGO: (s, c) => (s.cargo = c),
     CLR_CARGO: (s) => (s.cargo = {}),
+    SET_CONTAINER_LIST: (s, c) => (s.containers = c),
+    CLR_CONTAINER_LIST: (s) => (s.containers = []),
+    SET_CONTAINER: (s, c) => (s.container = c),
+    CLR_CONTAINER: (s) => (s.container = {}),
   },
   actions: {
     async getMyClients({ commit, dispatch }) {
@@ -137,6 +145,38 @@ export default {
         })
         if (response.success) {
           commit('SET_CARGO', response.cargo)
+        }
+        if (response.message) {
+          commit('SET_MSG', response.message)
+        }
+      } catch (e) {
+        commit('SET_ERROR', e)
+        throw e
+      }
+    },
+    async getFindContainers({ commit, dispatch }, containerQuery) {
+      try {
+        const response = await dispatch('fetchGet', {
+          url: `directory/containers/find&query=${containerQuery}`,
+        })
+        if (response.success) {
+          commit('SET_CONTAINER_LIST', response.containers)
+        }
+        if (response.message) {
+          commit('SET_MSG', response.message)
+        }
+      } catch (e) {
+        commit('SET_ERROR', e)
+        throw e
+      }
+    },
+    async getContainerById({ commit, dispatch }, containerId) {
+      try {
+        const response = await dispatch('fetchGet', {
+          url: `directory/container/by/id/&id=${containerId}`,
+        })
+        if (response.success) {
+          commit('SET_CONTAINER', response.container)
         }
         if (response.message) {
           commit('SET_MSG', response.message)

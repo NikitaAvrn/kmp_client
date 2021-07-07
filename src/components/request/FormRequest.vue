@@ -151,7 +151,7 @@
       </div>
       <div class="row" v-show="REQUEST_PROCCESSING.cargoType < 4">
         <div class="input-field col s12 m6">
-          <input id="count_container" type="number" min="1" max="99" value="1" class="validate" />
+          <input id="count_container" type="number" min="1" max="99" value="1" v-model="REQUEST_PROCCESSING.containerCount" />
           <label for="count_container">Количество контейнеров</label>
         </div>
         <div class="col s12 m6">
@@ -211,22 +211,22 @@
       </div>
       <div class="row" v-show="REQUEST_PROCCESSING.cargoType == 1">
         <div class="input-field col s6 m6">
-          <input type="text" id="autocomplete-input" />
-          <label for="autocomplete-input">В порту отправления</label>
+          <input type="text" id="sendPortConnectionMode" v-model="REQUEST_PROCCESSING.sendPortConnectionMode" />
+          <label for="sendPortConnectionMode">В порту отправления</label>
         </div>
         <div class="input-field col s6 m6">
-          <input type="text" id="autocomplete-input" />
-          <label for="autocomplete-input">В порту назначения</label>
+          <input type="text" id="destinationPortConnectionMode" v-model="REQUEST_PROCCESSING.destinationPortConnectionMode" />
+          <label for="destinationPortConnectionMode">В порту назначения</label>
         </div>
       </div>
       <!-- <hr /> -->
       <div class="row" v-show="REQUEST_PROCCESSING.cargoType < 4">
         <div class="col s12 m6">
-          <cargo-autocomplete label="Груз" v-model="REQUEST_PROCCESSING.cargo" ref="cargo" />
+          <cargo-autocomplete label="Груз" v-model="REQUEST_PROCCESSING.containerCargo" ref="cargo" />
         </div>
         <div class="input-field col s12 m6">
-          <input id="cargoTitleAdd" type="text" class="validate" />
-          <label for="cargoTitleAddя">Дополнительное наименование груза</label>
+          <input id="cargoTitleAdd" type="text" v-model="REQUEST_PROCCESSING.containerCargoAdd" class="validate" />
+          <label for="cargoTitleAdd">Дополнительное наименование груза</label>
         </div>
       </div>
     </div>
