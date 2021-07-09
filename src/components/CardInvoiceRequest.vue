@@ -1,10 +1,14 @@
 <template>
-  <div class="card z-depth-3" :class="{ 'green lighten-5': invoice.payment >= invoice.summa, 'red lighten-5': invoice.payment < invoice.summa }">
+  <div class="card z-depth-3">
     <div class="card-content black-text">
       <span class="card-title"
         >№{{ invoice.number }} <small>от {{ invoice.date }}</small></span
       >
-      <p><span class="grey-text">Статус счета:</span> {{ invoice.status }}</p>
+      <p><span class="grey-text">Поставщик:</span> {{ invoice.supplier }}</p>
+      <p><span class="grey-text">Покупатель:</span> {{ invoice.customer }}</p>
+      <p><span class="grey-text">Комментарий:</span> {{ invoice.commentInvoice }}</p>
+      <p :class="{ 'green lighten-5': invoice.payment >= invoice.summa, 'red lighten-5': invoice.payment < invoice.summa }"
+      ><span>Статус счета:</span> {{ invoice.status }}</p>
       <p><span class="grey-text">Клиент:</span> {{ invoice.client }}</p>
       <p><span class="grey-text">Сумма по счету:</span> {{ invoice.summa | currency }}</p>
       <p><span class="grey-text">Оплачено:</span> {{ invoice.payment | currency }}</p>
@@ -64,10 +68,10 @@ export default {
       windowPrint.document.close()
       windowPrint.focus()
       windowPrint.onload = () => {
-        windowPrint.print()
+        //windowPrint.print()
       }
       windowPrint.onafterprint = () => {
-        windowPrint.close()
+        //windowPrint.close()
       }
     },
   },

@@ -10,7 +10,7 @@
           <label for="weight">Вес груза</label>
         </div>
       </div>
-      <packaging-autocomplete label="Упаковка" v-show="document.packaging != 60" v-model="document.packaging" />
+      <packaging-autocomplete v-show="document.packaging != 60" label="Упаковка" v-model="document.packaging" />
       <div class="row" v-show="(document.packaging = 60)">
         <div class="input-field col s12">
           <input id="seal" type="text" v-model="document.seal" />
@@ -45,7 +45,7 @@
       </div>
     </div>
     <div class="card-action">
-      <a href="#" class="black-text"><i class="material-icons left">print</i></a>
+      <a href="#" class="black-text hide-on-med-and-down" @click.prevent="printConosament(document.document)"><i class="material-icons left">print</i></a>
       <a href="#" class="black-text"><i class="material-icons left">download</i></a>
       <a href="#" class="black-text"><i class="material-icons left">email</i></a>
     </div>
@@ -53,17 +53,42 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 import CargoAutocomplete from './CargoAutocomplete.vue'
 import ContainerAutocomplete from './ContainerAutocomplete.vue'
 import PackagingAutocomplete from './PackagingAutocomplete.vue'
 export default {
   components: { CargoAutocomplete, ContainerAutocomplete, PackagingAutocomplete },
   props: ['document'],
+  computed: {
+    ...mapGetters(['PRINT_CONTENT']),
+  },
   data: () => ({
     collapsible: null,
   }),
   mounted() {
     this.collapsible = M.Collapsible.init(this.$refs.collapsible, {})
+  },
+  methods: {
+    ...mapActions(['getConosamentPrint']),
+    async printConosament(document) {
+      await this.getConosamentPrint(document)
+
+      let windowPrint = window.open('_blank', 'print-invoice', 'left=50,top=50,width=1024,height=768,toolbar=0,location=yes,resizable=yes,scrollbars=yes,status=yes')
+      windowPrint.document.write('<title>Печать коносамента ' + document + '</title>')
+      windowPrint.document.write('<link rel="stylesheet" href="http://340.ru/css/pr.css" type="text/css" />')
+      windowPrint.document.write('<div>')
+      windowPrint.document.write(this.PRINT_CONTENT)
+      windowPrint.document.write('</div>')
+      windowPrint.document.close()
+      windowPrint.focus()
+      windowPrint.onload = () => {
+        windowPrint.print()
+      }
+      windowPrint.onafterprint = () => {
+        windowPrint.close()
+      }
+    },
   },
 }
 </script>

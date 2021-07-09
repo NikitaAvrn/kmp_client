@@ -24,7 +24,7 @@
       <documents-request />
     </div>
     <div id="invoice" class="col s12">
-      <invoice-request />
+      <invoice-request :number="$route.query.number" />
     </div>
 
     <div class="fixed-action-btn">
@@ -57,6 +57,7 @@ export default {
       swipeable: this.swipeable,
     })
     this.CLR_REQUEST_PROCCESSING()
+    this.CLR_INVOICE()
   },
   beforeDestroy() {
     if (this.tabs && this.tabs.destroy) {
@@ -64,7 +65,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['CLR_REQUEST_PROCCESSING']),
+    ...mapMutations(['CLR_REQUEST_PROCCESSING','CLR_INVOICE']),
   },
 }
 </script>

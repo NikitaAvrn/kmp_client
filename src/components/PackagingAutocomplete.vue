@@ -35,7 +35,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['getFindPackaging', 'getPackagingById']),
+    ...mapActions(['getFindPackagings', 'getPackagingById']),
     async updateText(id) {
       await this.getPackagingById(id)
       this.packagingQuery = this.PACKAGING.title
@@ -48,7 +48,7 @@ export default {
       if (this.packagingQuery.length < 3) {
         return
       }
-      await this.getFindPackaging(this.packagingQuery)
+      await this.getFindPackagings(this.packagingQuery)
       if (!this.PACKAGING_LIST) {
         return
       }

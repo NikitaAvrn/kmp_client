@@ -50,6 +50,7 @@ export default {
     CLR_PACKAGING: (s) => (s.packaging = {}),
   },
   actions: {
+    //клиенты компании
     async getMyClients({ commit, dispatch }) {
       try {
         const response = await dispatch('fetchGet', {
@@ -66,6 +67,7 @@ export default {
         throw e
       }
     },
+    //поиск клиентов
     async getFindClients({ commit, dispatch }, clientQuery) {
       try {
         const response = await dispatch('fetchGet', {
@@ -82,6 +84,7 @@ export default {
         throw e
       }
     },
+    //клиент по id
     async getClientById({ commit, dispatch }, clientId) {
       try {
         const response = await dispatch('fetchGet', {
@@ -98,6 +101,7 @@ export default {
         throw e
       }
     },
+    //поиск портов
     async getFindPorts({ commit, dispatch }, portQuery) {
       try {
         const response = await dispatch('fetchGet', {
@@ -114,6 +118,7 @@ export default {
         throw e
       }
     },
+    //порт по id
     async getPortById({ commit, dispatch }, portId) {
       try {
         const response = await dispatch('fetchGet', {
@@ -130,6 +135,7 @@ export default {
         throw e
       }
     },
+    //поиск грузов
     async getFindCargoes({ commit, dispatch }, cargoQuery) {
       try {
         const response = await dispatch('fetchGet', {
@@ -146,6 +152,7 @@ export default {
         throw e
       }
     },
+    //груз по id
     async getCargoById({ commit, dispatch }, cargoId) {
       try {
         const response = await dispatch('fetchGet', {
@@ -162,6 +169,7 @@ export default {
         throw e
       }
     },
+    //поиск контейнеров
     async getFindContainers({ commit, dispatch }, containerQuery) {
       try {
         const response = await dispatch('fetchGet', {
@@ -178,6 +186,7 @@ export default {
         throw e
       }
     },
+    //данные контейнера по номеру
     async getContainerById({ commit, dispatch }, containerId) {
       try {
         const response = await dispatch('fetchGet', {
@@ -194,13 +203,14 @@ export default {
         throw e
       }
     },
+    //поиск упаковок
     async getFindPackagings({ commit, dispatch }, packagingQuery) {
       try {
         const response = await dispatch('fetchGet', {
           url: `directory/packaging/find&query=${packagingQuery}`,
         })
         if (response.success) {
-          commit('SET_PACKAGING_LIST', response.packaging)
+          commit('SET_PACKAGING_LIST', response.packagings)
         }
         if (response.message) {
           commit('SET_MSG', response.message)
@@ -210,6 +220,7 @@ export default {
         throw e
       }
     },
+    //упаковка по id
     async getPackagingById({ commit, dispatch }, packagingId) {
       try {
         const response = await dispatch('fetchGet', {

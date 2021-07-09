@@ -1,9 +1,11 @@
 export default {
   state: {
     invoices: [],
+    invoice: {}
   },
   getters: {
     INVOICE_LIST: (s) => s.invoices,
+    INVOICE: (s) => s.invoice,
   },
   mutations: {
     SET_INVOICE_LIST: (s, l) => (s.invoices = l),
@@ -12,6 +14,8 @@ export default {
       let index = s.invoices.findIndex((invoices) => req._id === invoices._id)
       s.invoices.splice(index, 1)
     },
+    SET_INVOICE: (s, i) => (s.invoice = i),
+    CLR_INVOICE: (s) => (s.invoices = {}),
   },
   actions: {
     async getInvoices({ commit, dispatch }) {
@@ -30,13 +34,13 @@ export default {
         throw e
       }
     },
-    async getInvoiceById({ commit, dispatch }, id) {
+    async getInvoicesRequest({ commit, dispatch }, number) {
       try {
         const response = await dispatch('fetchGet', {
-          url: `invoice/${id}`,
+          url: `invoices/request/&number=${number}`,
         })
         if (response.success) {
-          commit('SET_INVOICE_PROCCESSING', response.invoice)
+          commit('SET_INVOICE', response.invoice)
         }
         if (response.message) {
           commit('SET_MSG', response.message)
