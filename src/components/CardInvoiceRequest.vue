@@ -7,8 +7,7 @@
       <p><span class="grey-text">Поставщик:</span> {{ invoice.supplier }}</p>
       <p><span class="grey-text">Покупатель:</span> {{ invoice.customer }}</p>
       <p><span class="grey-text">Комментарий:</span> {{ invoice.commentInvoice }}</p>
-      <p :class="{ 'green lighten-5': invoice.payment >= invoice.summa, 'red lighten-5': invoice.payment < invoice.summa }"
-      ><span>Статус счета:</span> {{ invoice.status }}</p>
+      <p :class="{ 'green lighten-5': invoice.payment >= invoice.summa, 'red lighten-5': invoice.payment < invoice.summa }"><span>Статус счета:</span> {{ invoice.status }}</p>
       <p><span class="grey-text">Клиент:</span> {{ invoice.client }}</p>
       <p><span class="grey-text">Сумма по счету:</span> {{ invoice.summa | currency }}</p>
       <p><span class="grey-text">Оплачено:</span> {{ invoice.payment | currency }}</p>
@@ -31,6 +30,9 @@
           </div>
         </li>
       </ul>
+    </div>
+    <div class="progress" v-show="true">
+      <div class="indeterminate"></div>
     </div>
     <div class="card-action">
       <a href="#" class="black-text hide-on-med-and-down" @click.prevent="printInvoice(invoice)"><i class="material-icons left">print</i></a>
@@ -68,10 +70,10 @@ export default {
       windowPrint.document.close()
       windowPrint.focus()
       windowPrint.onload = () => {
-        //windowPrint.print()
+        windowPrint.print()
       }
       windowPrint.onafterprint = () => {
-        //windowPrint.close()
+        windowPrint.close()
       }
     },
   },

@@ -176,10 +176,13 @@ textarea.materialize-textarea:focus:not([readonly]) + label {
 .input-field .prefix.active {
   color: #8e9efd;
 }
-[type="radio"]:checked+span:after, [type="radio"].with-gap:checked+span:after {
+[type='radio']:checked + span:after,
+[type='radio'].with-gap:checked + span:after {
   background-color: #8e9efd;
 }
-[type="radio"]:checked+span:after, [type="radio"].with-gap:checked+span:before, [type="radio"].with-gap:checked+span:after {
+[type='radio']:checked + span:after,
+[type='radio'].with-gap:checked + span:before,
+[type='radio'].with-gap:checked + span:after {
   border: 2px solid #8e9efd;
 }
 .dropdown-content li > a,
@@ -210,13 +213,17 @@ textarea.materialize-textarea:focus:not([readonly]) + label {
 
 .progress {
   background-color: #8e9efd;
-  margin: 0!important;
-  position: fixed!important;
+}
+.progress .determinate {
+  background-color: #3949ab;
+}
+.progress-scroll {
+  margin: 0 !important;
+  position: fixed !important;
   top: 0;
   z-index: 100;
 }
-
-.progress .determinate {
+.progress .indeterminate {
   background-color: #3949ab;
 }
 
