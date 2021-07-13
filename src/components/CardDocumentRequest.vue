@@ -44,9 +44,10 @@
         </div>
       </div>
     </div>
+    <download-progress ref="downloadTimer" />
     <div class="card-action">
       <a href="#" class="black-text hide-on-med-and-down" @click.prevent="printConosament(document.document)"><i class="material-icons left">print</i></a>
-      <a href="#" class="black-text"><i class="material-icons left">download</i></a>
+      <a href="#" class="black-text" @click.prevent="downloadConosament(document.document)"><i class="material-icons left">download</i></a>
       <a href="#" class="black-text"><i class="material-icons left">email</i></a>
     </div>
   </div>
@@ -57,11 +58,13 @@ import { mapActions, mapGetters } from 'vuex'
 import CargoAutocomplete from './CargoAutocomplete.vue'
 import ContainerAutocomplete from './ContainerAutocomplete.vue'
 import PackagingAutocomplete from './PackagingAutocomplete.vue'
+import DownloadProgress from './app/DownloadProgress.vue'
+
 export default {
-  components: { CargoAutocomplete, ContainerAutocomplete, PackagingAutocomplete },
+  components: { CargoAutocomplete, ContainerAutocomplete, PackagingAutocomplete, DownloadProgress },
   props: ['document'],
   computed: {
-    ...mapGetters(['PRINT_CONTENT']),
+    ...mapGetters(['PRINT_CONTENT', 'LINK']),
   },
   data: () => ({
     collapsible: null,
@@ -70,7 +73,7 @@ export default {
     this.collapsible = M.Collapsible.init(this.$refs.collapsible, {})
   },
   methods: {
-    ...mapActions(['getConosamentPrint']),
+    ...mapActions(['getConosamentPrint', 'getConosamentDownload']),
     async printConosament(document) {
       await this.getConosamentPrint(document)
 
@@ -89,6 +92,18 @@ export default {
         windowPrint.close()
       }
     },
+    async downloadConosament(conosament) {
+      this.$refs.downloadTimer.start(10000)
+      await this.getConosamentDownload(conosament)
+      setTimeout(() => {
+        let fileLink = document.createElement('a')
+        fileLink.href = this.LINK
+        fileLink.target = '_blink'
+        fileLink.setAttribute('download', 'on')
+        document.body.appendChild(fileLink)
+        fileLink.click()
+      }, 10000)
+    }
   },
 }
 </script>

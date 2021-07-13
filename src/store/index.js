@@ -8,6 +8,7 @@ import settings from './modules/settings'
 import user from './modules/user'
 import directory from './modules/directory'
 import print from './modules/print'
+import download from './modules/download'
 import config from './config.json'
 
 Vue.use(Vuex)
@@ -136,6 +137,7 @@ export default new Vuex.Store({
     settings,
     user,
     directory,
-    print
+    print,
+    download
   },
 })

@@ -31,12 +31,10 @@
         </li>
       </ul>
     </div>
-    <div class="progress" v-show="true">
-      <div class="indeterminate"></div>
-    </div>
+    <download-progress ref="downloadTimer" />
     <div class="card-action">
       <a href="#" class="black-text hide-on-med-and-down" @click.prevent="printInvoice(invoice)"><i class="material-icons left">print</i></a>
-      <a href="#" class="black-text"><i class="material-icons left">download</i></a>
+      <a href="#" class="black-text" @click.prevent="downloadInvoice(invoice)"><i class="material-icons left">download</i></a>
       <a href="#" class="black-text"><i class="material-icons left">email</i></a>
     </div>
   </div>
@@ -44,8 +42,10 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import DownloadProgress from './app/DownloadProgress.vue'
 
 export default {
+  components: { DownloadProgress },
   props: ['invoice'],
   data: () => ({
     collapsible: null,
@@ -54,11 +54,12 @@ export default {
     this.collapsible = M.Collapsible.init(this.$refs.collapsible, {})
   },
   computed: {
-    ...mapGetters(['PRINT_CONTENT']),
+    ...mapGetters(['PRINT_CONTENT', 'LINK']),
   },
   methods: {
-    ...mapActions(['getInvoicePrint']),
+    ...mapActions(['getInvoicePrint', 'getInvoiceDownload']),
     async printInvoice(invoice) {
+      this.$refs.downloadTimer.start(1000)
       await this.getInvoicePrint(invoice.request)
 
       let windowPrint = window.open('_blank', 'print-invoice', 'left=50,top=50,width=1024,height=768,toolbar=0,location=yes,resizable=yes,scrollbars=yes,status=yes')
@@ -76,6 +77,18 @@ export default {
         windowPrint.close()
       }
     },
+    async downloadInvoice(invoice) {
+      this.$refs.downloadTimer.start(10000)
+      await this.getInvoiceDownload(invoice.request)
+      setTimeout(() => {
+        let fileLink = document.createElement('a')
+        fileLink.href = this.LINK
+        fileLink.target = '_blink'
+        fileLink.setAttribute('download', 'on')
+        document.body.appendChild(fileLink)
+        fileLink.click()
+      }, 10000)
+    }
   },
 }
 </script>

@@ -226,6 +226,10 @@ textarea.materialize-textarea:focus:not([readonly]) + label {
 .progress .indeterminate {
   background-color: #3949ab;
 }
+.progress-download {
+  margin-bottom: 0;
+  margin-top: 0;
+}
 
 .tabs .tab a:focus,
 .tabs .tab a:focus.active {
