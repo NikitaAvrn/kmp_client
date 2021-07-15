@@ -75,6 +75,7 @@ export default {
   methods: {
     ...mapActions(['getConosamentPrint', 'getConosamentDownload']),
     async printConosament(document) {
+      this.$refs.downloadTimer.start(1000)
       await this.getConosamentPrint(document)
 
       let windowPrint = window.open('_blank', 'print-invoice', 'left=50,top=50,width=1024,height=768,toolbar=0,location=yes,resizable=yes,scrollbars=yes,status=yes')

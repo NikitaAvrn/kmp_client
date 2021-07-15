@@ -8,23 +8,23 @@
         <ul id="tabs-swipe" class="tabs" ref="tabs">
           <li class="tab col s4">
             <a href="#form-request"
-              >Заявка <span>№{{ $route.query.number }}<small></small></span
+              >Заявка <span><small>№{{ $route.query.number }}</small></span
             ></a>
           </li>
           <li class="tab col s4"><a href="#documents">Коносаменты</a></li>
-          <li class="tab col s4"><a href="#invoice">Счет</a></li>
+          <li class="tab col s4" v-if="INVOICE"><a href="#invoice">Счет <small>№ {{ INVOICE.number }}</small></a></li>
         </ul>
       </div>
     </div>
 
     <div id="form-request" class="col s12">
-      <form-request :number="$route.query.number" />
+      <form-request />
     </div>
     <div id="documents" class="col s12">
       <documents-request />
     </div>
-    <div id="invoice" class="col s12">
-      <invoice-request :number="$route.query.number" />
+    <div id="invoice" class="col s12" v-show="INVOICE">
+      <invoice-request />
     </div>
 
     <div class="fixed-action-btn">
@@ -39,12 +39,13 @@
 import FormRequest from '../components/request/FormRequest.vue'
 import utils from '@/utils/utils'
 import DocumentsRequest from '../components/request/DocumentsRequest.vue'
-import { mapMutations } from 'vuex'
+import { mapMutations, mapGetters, mapActions } from 'vuex'
 import InvoiceRequest from '../components/request/InvoiceRequest.vue'
 
 export default {
   components: { FormRequest, DocumentsRequest, InvoiceRequest },
   computed: {
+    ...mapGetters(['REQUEST_PROCCESSING', 'INVOICE']),
     swipeable() {
       return utils.isMobile()
     },
@@ -52,12 +53,16 @@ export default {
   data: () => ({
     tabs: null,
   }),
-  mounted() {
+  async mounted() {
     this.tabs = M.Tabs.init(this.$refs.tabs, {
       swipeable: this.swipeable,
     })
     this.CLR_REQUEST_PROCCESSING()
     this.CLR_INVOICE()
+    if (!(await this.getRequestByNumber(this.$route.query.number))) {
+      this.$router.push('/requests')
+    }
+    await this.getInvoicesRequest(this.$route.query.number)
   },
   beforeDestroy() {
     if (this.tabs && this.tabs.destroy) {
@@ -66,6 +71,7 @@ export default {
   },
   methods: {
     ...mapMutations(['CLR_REQUEST_PROCCESSING','CLR_INVOICE']),
+    ...mapActions(['getRequestByNumber', 'getInvoicesRequest']),
   },
 }
 </script>

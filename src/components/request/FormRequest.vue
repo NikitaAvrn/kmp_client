@@ -242,7 +242,6 @@ import ClientAutocomplete from '../ClientAutocomplete.vue'
 import PortAutocomplete from '../PortAutocomplete.vue'
 
 export default {
-  props: ['number'],
   components: { Loading, MyClients, ClientAutocomplete, PortAutocomplete, CargoAutocomplete },
   computed: {
     ...mapGetters(['REQUEST_PROCCESSING']),
@@ -291,9 +290,6 @@ export default {
     },
   },
   async mounted() {
-    if (!(await this.getRequestByNumber(this.number))) {
-      this.$router.push('/requests')
-    }
     this.owner = M.FormSelect.init(this.$refs.owner, {})
     this.typeGeneral = M.FormSelect.init(this.$refs.typeGeneral, {})
     this.typeContainer = M.FormSelect.init(this.$refs.typeContainer, {})
