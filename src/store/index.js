@@ -9,6 +9,7 @@ import user from './modules/user'
 import directory from './modules/directory'
 import print from './modules/print'
 import download from './modules/download'
+import dashboard from './modules/dashboard'
 import config from './config.json'
 
 Vue.use(Vuex)
@@ -138,6 +139,7 @@ export default new Vuex.Store({
     user,
     directory,
     print,
-    download
+    download,
+    dashboard
   },
 })

@@ -3,36 +3,42 @@
     <div class="page-title hide-on-large-only">
       <h3>{{ $route.name }}</h3>
     </div>
-    <div>
+    <loading v-if="loading"/>
+    <div else>
       <ul class="collapsible popout" ref="collapsible">
-        <li>
-          <div class="collapsible-header"><i class="material-icons">filter_drama</i>Счета</div>
-          <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-        </li>
-        <li>
-          <div class="collapsible-header"><i class="material-icons">place</i>Заявки</div>
-          <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-        </li>
-        <li>
-          <div class="collapsible-header"><i class="material-icons">whatshot</i>Коносаменты</div>
-          <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-        </li>
-        <li>
-          <div class="collapsible-header"><i class="material-icons">whatshot</i>Контейнеры</div>
-          <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-        </li>
+        <timeline-move 
+          v-for="conosament in ACTIVE_CONOSAMENT"
+          :key="conosament.conosament"
+          :document="conosament"
+        />
       </ul>
     </div>
   </div>
 </template>
 
 <script>
+import TimelineMove from '../components/TimelineMove.vue'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
+import Loading from '../components/app/Loading.vue'
+
 export default {
   name: 'Home',
+  computed: {
+    ...mapGetters(['ACTIVE_CONOSAMENT'])
+  },
+  components: {
+    TimelineMove,
+    Loading
+  },
   data: () => ({
     collapsible: null,
+    loading: true
   }),
-  mounted() {
+  async mounted() {
+    this.loading = true
+    this.CLR_ACTIVE_CONOSAMENT()
+    await this.getActiveConosament()
+    this.loading = false
     this.collapsible = M.Collapsible.init(this.$refs.collapsible, {})
   },
   beforeDestroy() {
@@ -40,5 +46,9 @@ export default {
       this.collapsible.destroy()
     }
   },
+  methods: {
+    ...mapActions(['getActiveConosament']),
+    ...mapMutations(['CLR_ACTIVE_CONOSAMENT'])
+  }
 }
 </script>

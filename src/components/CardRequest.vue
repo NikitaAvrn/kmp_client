@@ -26,11 +26,11 @@
               </p>
               <div class="divider" v-if="inx + 1 < request.documents.length"></div>
             </div>
-            <div class="collapsible-btns">
+            <!-- <div class="collapsible-btns">
               <a href="#" class="black-text waves-effect btn-flat hide-on-med-and-down"><i class="material-icons left">print</i></a>
               <a href="#" class="black-text waves-effect btn-flat"><i class="material-icons left">download</i></a>
               <a href="#" class="black-text waves-effect btn-flat"><i class="material-icons left">email</i></a>
-            </div>
+            </div> -->
           </div>
         </li>
         <li>
@@ -43,11 +43,11 @@
               </p>
               <p><span class="grey-text">Сумма по счету:</span> {{ request.invoice.summa | currency }}</p>
             </div>
-            <div class="collapsible-btns">
+            <!-- <div class="collapsible-btns">
               <a href="#" class="black-text waves-effect btn-flat hide-on-med-and-down"><i class="material-icons left">print</i></a>
               <a href="#" class="black-text waves-effect btn-flat"><i class="material-icons left">download</i></a>
               <a href="#" class="black-text waves-effect btn-flat"><i class="material-icons left">email</i></a>
-            </div>
+            </div> -->
           </div>
         </li>
       </ul>
