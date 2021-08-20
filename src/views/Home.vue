@@ -4,31 +4,33 @@
       <h3>{{ $route.name }}</h3>
     </div>
     <loading v-if="loading"/>
-    <div else>
-      <ul class="collapsible popout" ref="collapsible">
-        <timeline-move 
-          v-for="conosament in ACTIVE_CONOSAMENT"
-          :key="conosament.conosament"
-          :document="conosament"
-        />
-      </ul>
+    <div v-else>
+      <h5 class="center">Здравствуйте, {{ USER.name }} {{ USER.secondname }}</h5>
+      <schedule-table
+        v-for="(table, inx) in SCHEDULE"
+        :key="inx"
+        :table="table"
+      />
+      <p>
+        Примечания:<br>* ETA (Estimated Time of Arrival) — ожидаемая дата прибытия<br>* ETD (Estimated Time of Departure) — ожидаемая дата отправки<br>Расписание может быть изменено Перевозчиком без предварительного уведомления.
+      </p>
     </div>
   </div>
 </template>
 
 <script>
-import TimelineMove from '../components/TimelineMove.vue'
-import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import Loading from '../components/app/Loading.vue'
+import ScheduleTable from '../components/ScheduleTable.vue'
 
 export default {
   name: 'Home',
   computed: {
-    ...mapGetters(['ACTIVE_CONOSAMENT'])
+    ...mapGetters(['SCHEDULE', 'USER'])
   },
   components: {
-    TimelineMove,
-    Loading
+    Loading,
+    ScheduleTable
   },
   data: () => ({
     collapsible: null,
@@ -36,19 +38,14 @@ export default {
   }),
   async mounted() {
     this.loading = true
-    this.CLR_ACTIVE_CONOSAMENT()
-    await this.getActiveConosament()
+    await this.getHomeSchedule()
     this.loading = false
-    this.collapsible = M.Collapsible.init(this.$refs.collapsible, {})
   },
   beforeDestroy() {
-    if (this.collapsible && this.collapsible.destroy) {
-      this.collapsible.destroy()
-    }
+
   },
   methods: {
-    ...mapActions(['getActiveConosament']),
-    ...mapMutations(['CLR_ACTIVE_CONOSAMENT'])
+    ...mapActions(['getHomeSchedule'])
   }
 }
 </script>
