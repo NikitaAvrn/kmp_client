@@ -14,13 +14,21 @@
 .helper-text.invalid {
   color: #f44336;
 }
+.app-main-layout {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+main {
+  flex: 1 0 auto;
+}
 .app-page {
   padding: 1rem;
-  min-height: calc(100vh - 114px);
+  /* min-height: calc(100vh - 114px); */
 }
-.app-main-layout {
+/* .app-main-layout {
   min-height: 100vh;
-}
+} */
 .page-title {
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
