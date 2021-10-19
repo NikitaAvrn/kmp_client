@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuelidate from 'vuelidate'
 import { VueMaskDirective } from 'v-mask'
+import VueMeta from 'vue-meta'
 import App from './App.vue'
 import store from './store'
 import router from './router'
@@ -20,6 +21,7 @@ Vue.config.productionTip = false
 
 Vue.use(Vuelidate)
 Vue.use(messagePlugin)
+Vue.use(VueMeta)
 
 Vue.directive('tooltip-right', tooltipRightDirective)
 Vue.directive('tooltip-left', tooltipLeftDirective)

@@ -3,7 +3,6 @@
     <div class="page-title hide-on-large-only">
       <h3>{{ $route.name }}</h3>
     </div>
-    <!-- РКДВ, РШ, ВКЛ, ВЛЛ -->
     <loading v-if="loading" />
     <div v-else>
       <div class="row">
@@ -37,10 +36,16 @@ import utils from '@/utils/card.utils'
 import Loading from '../components/app/Loading.vue'
 
 export default {
+  metaInfo: {
+    title: 'Заявки на перевозку',
+  },
   components: { CardRequest, Loading },
   computed: {
     ...mapGetters(['REQUEST_LIST']),
     req() {
+      if (!this.REQUEST_LIST) {
+        return []
+      }
       let findArray = this.REQUEST_LIST.filter((card) => {
         if (this.findQuery === '') return card
         this.findQuery = this.findQuery.toLowerCase()

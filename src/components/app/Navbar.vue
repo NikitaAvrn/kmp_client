@@ -2,7 +2,12 @@
   <nav>
     <div class="nav-wrapper blue darken-3">
       <a href="#" class="brand-logo">
-        <img src="../../assets/logo/kasco_logo.svg" style="padding-left: 1rem; padding-top: .5rem; padding-bottom: .25rem; height: 56px;" alt="kasco_logo" srcset="" />
+        <img
+          src="../../assets/logo/kasco_logo.svg"
+          style="padding-left: 1rem; padding-top: .5rem; padding-bottom: .25rem; height: 56px;"
+          alt="kasco_logo"
+          srcset=""
+        />
       </a>
       <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
       <a href="#modal1" class="sidenav-trigger modal-trigger right"><i class="fas fa-filter"></i></a>
@@ -73,8 +78,11 @@ export default {
 #nav-mobile {
   margin-left: 72px;
 }
-#nav-mobile li.active a {
+/* #nav-mobile li.active a {
   font-weight: bold;
   border-bottom: 3px solid #fff;
+} */
+nav li.active a {
+  box-shadow: inset 0 -3px 0 white;
 }
 </style>

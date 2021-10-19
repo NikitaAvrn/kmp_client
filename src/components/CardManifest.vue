@@ -26,15 +26,16 @@
       </p>
     </div>
     <div class="card-action">
-      <a href="#" class="black-text"><i class="material-icons left">print</i></a>
-      <a href="#" class="black-text"><i class="material-icons left">download</i></a>
-      <a href="#" class="black-text"><i class="material-icons left">email</i></a>
+      <buttons-conosament :document="bol.number" />
     </div>
   </div>
 </template>
 
 <script>
+import ButtonsConosament from './ButtonsConosament.vue'
+
 export default {
+  components: { ButtonsConosament },
   props: ['bol'],
   data: () => ({
     collapsible: null,
@@ -45,9 +46,4 @@ export default {
 }
 </script>
 
-<style>
-.collapsible-btns {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-}
-</style>
+<style></style>

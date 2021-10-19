@@ -21,8 +21,15 @@
           <td class="hide-on-med-and-down"></td>
           <td class="hide-on-med-and-down">{{ user.post }}</td>
           <td nowrap>
-            <a href="#!" class="btn waves-effect white" :class="{ 'blue-text text-darken-3': user.activated, 'grey-text': !user.activated }"><i class="material-icons">edit</i></a>
-            <a href="#!" class="btn waves-effect white hide-on-med-and-down" :class="{ 'blue-text text-darken-3': user.activated, 'grey-text': !user.activated }"><i class="material-icons">delete</i></a>
+            <a href="#!" class="btn waves-effect white" :class="{ 'blue-text text-darken-3': user.activated, 'grey-text': !user.activated }"
+              ><i class="material-icons">edit</i></a
+            >
+            <a
+              href="#!"
+              class="btn waves-effect white hide-on-med-and-down"
+              :class="{ 'blue-text text-darken-3': user.activated, 'grey-text': !user.activated }"
+              ><i class="material-icons">delete</i></a
+            >
           </td>
         </tr>
       </tbody>
@@ -43,6 +50,9 @@ import { mapActions, mapGetters } from 'vuex'
 import utils from '@/utils/utils'
 
 export default {
+  metaInfo: {
+    title: 'Пользователи',
+  },
   computed: {
     ...mapGetters(['USER_LIST']),
     isMobile() {
@@ -52,7 +62,7 @@ export default {
       return this.USER_LIST.sort((a, b) => {
         return b.activated - a.activated
       })
-    }
+    },
   },
   methods: {
     ...mapActions(['getUsers']),
@@ -64,7 +74,7 @@ export default {
 </script>
 
 <style>
-  .btn {
-    margin-left: 0.5rem;
-  }
+.btn {
+  margin-left: 0.5rem;
+}
 </style>

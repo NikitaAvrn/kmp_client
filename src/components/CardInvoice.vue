@@ -29,17 +29,15 @@
       </ul>
     </div>
     <div class="card-action">
-      <a href="#" class="black-text hide-on-med-and-down" @click.prevent="printInvoice(invoice)"><i class="material-icons left">print</i></a>
-      <a href="#" class="black-text"><i class="material-icons left">download</i></a>
-      <a href="#" class="black-text"><i class="material-icons left">email</i></a>
+      <buttons-invoice :invoice="invoice" />
     </div>
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
-
+import ButtonsInvoice from './ButtonsInvoice.vue'
 export default {
+  components: { ButtonsInvoice },
   props: ['invoice'],
   data: () => ({
     collapsible: null,
@@ -47,37 +45,7 @@ export default {
   mounted() {
     this.collapsible = M.Collapsible.init(this.$refs.collapsible, {})
   },
-  computed: {
-    ...mapGetters(['PRINT_CONTENT']),
-  },
-  methods: {
-    ...mapActions(['getInvoicePrint']),
-    async printInvoice(invoice) {
-      await this.getInvoicePrint(invoice.request)
-
-      let windowPrint = window.open('_blank', 'print-invoice', 'left=50,top=50,width=1024,height=768,toolbar=0,location=yes,resizable=yes,scrollbars=yes,status=yes')
-      windowPrint.document.write('<title>Печать счета ' + invoice.number + ' от ' + invoice.date + '</title>')
-      windowPrint.document.write('<link rel="stylesheet" href="http://340.ru/css/pr.css" type="text/css" />')
-      windowPrint.document.write('<div>')
-      windowPrint.document.write(this.PRINT_CONTENT)
-      windowPrint.document.write('</div>')
-      windowPrint.document.close()
-      windowPrint.focus()
-      windowPrint.onload = () => {
-        windowPrint.print()
-      }
-      windowPrint.onafterprint = () => {
-        windowPrint.close()
-      }
-    },
-  },
 }
 </script>
 
-<style>
-.card-action {
-  display: flex;
-  justify-content: center;
-  margin-left: 1rem;
-}
-</style>
+<style></style>

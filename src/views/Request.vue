@@ -8,11 +8,18 @@
         <ul id="tabs-swipe" class="tabs" ref="tabs">
           <li class="tab col s4">
             <a href="#form-request"
-              >Заявка <span><small>№{{ $route.query.number }}</small></span
-            ></a>
+              >Заявка
+              <span
+                ><small>№{{ $route.query.number }}</small></span
+              ></a
+            >
           </li>
           <li class="tab col s4"><a href="#documents">Коносаменты</a></li>
-          <li class="tab col s4" v-if="INVOICE"><a href="#invoice">Счет <small>№ {{ INVOICE.number }}</small></a></li>
+          <li class="tab col s4" v-if="INVOICE">
+            <a href="#invoice"
+              >Счет <small>№ {{ INVOICE.number }}</small></a
+            >
+          </li>
         </ul>
       </div>
     </div>
@@ -43,6 +50,9 @@ import { mapMutations, mapGetters, mapActions } from 'vuex'
 import InvoiceRequest from '../components/request/InvoiceRequest.vue'
 
 export default {
+  metaInfo: {
+    title: 'Редактирование заявки',
+  },
   components: { FormRequest, DocumentsRequest, InvoiceRequest },
   computed: {
     ...mapGetters(['REQUEST_PROCCESSING', 'INVOICE']),
@@ -70,7 +80,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['CLR_REQUEST_PROCCESSING','CLR_INVOICE']),
+    ...mapMutations(['CLR_REQUEST_PROCCESSING', 'CLR_INVOICE']),
     ...mapActions(['getRequestByNumber', 'getInvoicesRequest']),
   },
 }

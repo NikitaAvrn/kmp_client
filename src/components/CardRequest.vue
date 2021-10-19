@@ -1,14 +1,16 @@
 <template>
   <div class="card white z-depth-3">
     <div class="card-content black-text">
-      <span class="card-title"
-        >№{{ request.number }} <small>от {{ request.date }}</small></span
-      >
-      <p><span class="grey-text">Статус заявки:</span> {{ request.status }}</p>
-      <p><span class="grey-text">Маршрут:</span> {{ request.out }} &rarr; {{ request.in }}</p>
-      <p><span class="grey-text">Груз:</span> {{ request.cargo }}</p>
-      <p><span class="grey-text">Тип перевозки:</span> {{ request.type }}</p>
-      <p><span class="grey-text">Менеджер:</span> {{ request.manager }}</p>
+      <div class="card-clickable" @click="clickCard(request.number)">
+        <span class="card-title"
+          >№{{ request.number }} <small>от {{ request.date }}</small></span
+        >
+        <p><span class="grey-text">Статус заявки:</span> {{ request.status }}</p>
+        <p><span class="grey-text">Маршрут:</span> {{ request.out }} &rarr; {{ request.in }}</p>
+        <p><span class="grey-text">Груз:</span> {{ request.cargo }}</p>
+        <p><span class="grey-text">Тип перевозки:</span> {{ request.type }}</p>
+        <p><span class="grey-text">Менеджер:</span> {{ request.manager }}</p>
+      </div>
       <ul class="collapsible z-depth-0" ref="collapsible">
         <li>
           <div class="collapsible-header"><i class="material-icons">insert_drive_file</i>Коносаменты</div>
@@ -24,18 +26,22 @@
               <p v-show="doc.ship">
                 <span class="grey-text">Т/х:</span> {{ doc.ship }} <small>({{ doc.flight }})</small>
               </p>
+              <!-- <button-print-conosament :document="doc.document" />
+              <button-download-conosament :document="doc.document" /> -->
+              <buttons-conosament :document="doc.document" />
               <div class="divider" v-if="inx + 1 < request.documents.length"></div>
             </div>
-            <!-- <div class="collapsible-btns">
-              <a href="#" class="black-text waves-effect btn-flat hide-on-med-and-down"><i class="material-icons left">print</i></a>
-              <a href="#" class="black-text waves-effect btn-flat"><i class="material-icons left">download</i></a>
-              <a href="#" class="black-text waves-effect btn-flat"><i class="material-icons left">email</i></a>
-            </div> -->
+            <!-- <div class="collapsible-btns"> -->
+            <!-- <a href="#" class="black-text waves-effect btn-flat"><i class="material-icons left">email</i></a> -->
+            <!-- </div> -->
           </div>
         </li>
         <li>
           <div class="collapsible-header" v-show="request.invoice.date"><i class="material-icons">local_atm</i>Счет</div>
-          <div class="collapsible-body" :class="{ 'green lighten-5': request.invoice.payment >= request.invoice.summa, 'red lighten-5': request.invoice.payment < request.invoice.summa }">
+          <div
+            class="collapsible-body"
+            :class="{ 'green lighten-5': request.invoice.payment >= request.invoice.summa, 'red lighten-5': request.invoice.payment < request.invoice.summa }"
+          >
             <div>
               <p><span class="grey-text">Статус счета:</span> {{ request.invoice.status }}</p>
               <p>
@@ -43,23 +49,25 @@
               </p>
               <p><span class="grey-text">Сумма по счету:</span> {{ request.invoice.summa | currency }}</p>
             </div>
-            <!-- <div class="collapsible-btns">
+            <div class="collapsible-btns">
               <a href="#" class="black-text waves-effect btn-flat hide-on-med-and-down"><i class="material-icons left">print</i></a>
               <a href="#" class="black-text waves-effect btn-flat"><i class="material-icons left">download</i></a>
-              <a href="#" class="black-text waves-effect btn-flat"><i class="material-icons left">email</i></a>
-            </div> -->
+              <!-- <a href="#" class="black-text waves-effect btn-flat"><i class="material-icons left">email</i></a> -->
+            </div>
           </div>
         </li>
       </ul>
     </div>
-    <div class="card-action">
+    <!-- <div class="card-action">
       <router-link tag="a" class="btn waves-effect white black-text" :to="'/request?number=' + this.request.number"><i class="material-icons left">edit</i>Редактировать</router-link>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
+import ButtonsConosament from './ButtonsConosament.vue'
 export default {
+  components: { ButtonsConosament },
   props: ['request'],
   data: () => ({
     collapsible: null,
@@ -72,12 +80,20 @@ export default {
       this.collapsible.destroy()
     }
   },
+  methods: {
+    clickCard(req) {
+      this.$router.push(`/request?number=${req}`)
+    },
+  },
 }
 </script>
 
-<style>
+<style scoped>
 .collapsible-btns {
   padding-top: 1rem;
   padding-bottom: 1rem;
+}
+.card-clickable {
+  cursor: pointer;
 }
 </style>

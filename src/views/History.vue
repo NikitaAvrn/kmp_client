@@ -8,7 +8,7 @@
       <div class="row">
         <div class="input-field col s12">
           <i class="material-icons prefix">search</i>
-          <input id="icon_prefix" type="text" class="validate">
+          <input id="icon_prefix" type="text" class="validate" />
           <label for="icon_prefix">Поиск по заявкам</label>
         </div>
       </div>
@@ -17,14 +17,6 @@
           <card-request :request="request" />
         </div>
       </div>
-    </div>
-
-    <div class="fixed-action-btn">
-      <router-link to="/request">
-        <a class="btn-floating btn-large waves-effect waves-light blue darken-3">
-          <i class="large material-icons">add</i>
-        </a>
-      </router-link>
     </div>
   </div>
 </template>
@@ -36,10 +28,16 @@ import utils from '@/utils/card.utils'
 import Loading from '../components/app/Loading.vue'
 
 export default {
+  metaInfo: {
+    title: 'История перевозок',
+  },
   components: { CardRequest, Loading },
   computed: {
     ...mapGetters(['HISTORY_LIST']),
     req() {
+      if (!this.HISTORY_LIST) {
+        return []
+      }
       return utils.arrayCardTransform(this.HISTORY_LIST, 3)
     },
   },

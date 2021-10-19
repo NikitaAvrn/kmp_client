@@ -8,22 +8,18 @@
         <ship-flight minlength="3" @select-flight="selectFlight" />
       </div>
     </div>
-    <div class="row" v-show="PORTS.length">
+    <div class="row" v-show="PORTS && PORTS.length">
       <div class="input-field col s12">
         <i class="material-icons prefix">domain</i>
         <select multiple v-model="selectPort" ref="select">
           <option value="" disabled>Выберете порт назначения</option>
-          <option
-            v-for="port in PORTS"
-            :key="port.code"
-            :value="port.code"
-          >{{ port.title }}</option>
+          <option v-for="port in PORTS" :key="port.code" :value="port.code">{{ port.title }}</option>
         </select>
         <label>Порт назначения</label>
       </div>
     </div>
     <loading v-show="loading" />
-    <div v-if="PORTS.length">
+    <div v-if="PORTS && PORTS.length">
       <div class="row">
         <div class="col s12 m6 offset-m3">
           <div class="card">
@@ -50,7 +46,6 @@
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -62,14 +57,17 @@ import { mapActions, mapGetters, mapMutations } from 'vuex'
 import Loading from '../components/app/Loading.vue'
 
 export default {
+  metaInfo: {
+    title: 'Манифесты',
+  },
   components: { CardManifest, ShipFlight, Loading },
   computed: {
     ...mapGetters(['DOCUMENTS', 'PORTS', 'FLIGHT']),
     docs() {
-      if(!this.DOCUMENTS || !this.selectPort) {
+      if (!this.DOCUMENTS || !this.selectPort) {
         return []
       }
-      const arr = this.DOCUMENTS.filter(d => this.selectPort.includes(d.inCode))
+      const arr = this.DOCUMENTS.filter((d) => this.selectPort.includes(d.inCode))
       return utils.arrayCardTransform(arr, 3)
     },
   },
@@ -87,7 +85,7 @@ export default {
     select: null,
     ship: null,
     loading: false,
-    selectPort: []
+    selectPort: [],
   }),
   methods: {
     ...mapActions(['getManifest']),
@@ -103,7 +101,7 @@ export default {
       setTimeout(() => {
         M.updateTextFields()
       }, 0)
-    }
+    },
   },
 }
 </script>

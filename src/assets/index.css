@@ -266,3 +266,25 @@ footer {
   height: auto !important;
   min-height: 100%;
 }
+
+i.spinner {
+  animation: 1s linear 0s normal none infinite running spinner;
+  -webkit-animation: 1s linear 0s normal none infinite running spinner;
+  width: -(width/2);
+}
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

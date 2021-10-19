@@ -10,13 +10,23 @@
                 <img src="../assets/logo/120.png" alt="KASCO" />
               </div>
               <div class="input-field">
-                <input id="email" type="text" v-model.trim="email" :class="{ invalid: ($v.email.$dirty && !$v.email.required) || ($v.email.$dirty && !$v.email.email) }" />
+                <input
+                  id="email"
+                  type="text"
+                  v-model.trim="email"
+                  :class="{ invalid: ($v.email.$dirty && !$v.email.required) || ($v.email.$dirty && !$v.email.email) }"
+                />
                 <label for="email">Email</label>
                 <small class="helper-text invalid" v-if="$v.email.$dirty && !$v.email.required">Введите email</small>
                 <small class="helper-text invalid" v-else-if="$v.email.$dirty && !$v.email.email">Введите корректный email</small>
               </div>
               <div class="input-field">
-                <input id="password" type="password" v-model="password" :class="{ invalid: ($v.password.$dirty && !$v.password.required) || ($v.password.$dirty && !$v.password.minLength) }" />
+                <input
+                  id="password"
+                  type="password"
+                  v-model="password"
+                  :class="{ invalid: ($v.password.$dirty && !$v.password.required) || ($v.password.$dirty && !$v.password.minLength) }"
+                />
                 <label for="password">Пароль</label>
                 <small class="helper-text invalid" v-if="$v.password.$dirty && !$v.password.required">Введите пароль</small>
                 <small class="helper-text invalid" v-else-if="$v.password.$dirty && !$v.password.minLength"
@@ -44,6 +54,9 @@ import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { email, required, minLength } from 'vuelidate/lib/validators'
 
 export default {
+  metaInfo: {
+    title: 'Аутентификация',
+  },
   data: () => ({
     email: '',
     password: '',

@@ -27,6 +27,9 @@
 import SessionTable from '../components/SessionTable.vue'
 
 export default {
+  metaInfo: {
+    title: 'Настройки',
+  },
   components: { SessionTable },
   data: () => ({
     collapsible: null,
