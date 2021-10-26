@@ -1,6 +1,6 @@
 <template>
   <a href="#" class="black-text hide-on-med-and-down" @click.prevent="printInvoice"
-    ><i class="material-icons" v-show="!loading">print</i> <i class="material-icons spinner" v-show="loading">cached</i></a
+    ><i class="material-icons" v-show="!loading">print</i><i class="material-icons spinner" v-show="loading">cached</i></a
   >
 </template>
 
@@ -20,7 +20,6 @@ export default {
     async printInvoice() {
       this.loading = true
       await this.getInvoicePrint(this.invoice.request)
-
       let windowPrint = window.open(
         '_blank',
         'print-invoice',

@@ -20,7 +20,6 @@ export default {
     ...mapActions(['getConosamentDownload']),
     async downloadConosament() {
       this.loading = true
-      //this.$refs.downloadTimer.start(10000)
       await this.getConosamentDownload(this.document)
       setTimeout(() => {
         let fileLink = document.createElement('a')

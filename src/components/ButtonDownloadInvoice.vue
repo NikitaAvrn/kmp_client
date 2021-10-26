@@ -20,7 +20,6 @@ export default {
     ...mapActions(['getInvoiceDownload']),
     async downloadInvoice() {
       this.loading = true
-      //this.$refs.downloadTimer.start(10000)
       await this.getInvoiceDownload(this.invoice.request)
       setTimeout(() => {
         let fileLink = document.createElement('a')

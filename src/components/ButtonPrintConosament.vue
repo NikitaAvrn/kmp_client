@@ -20,9 +20,7 @@ export default {
     ...mapActions(['getConosamentPrint']),
     async printConosament() {
       this.loading = true
-      //this.$refs.downloadTimer.start(1000)
       await this.getConosamentPrint(this.document)
-
       let windowPrint = window.open(
         '_blank',
         'print-invoice',

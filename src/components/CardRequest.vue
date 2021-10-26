@@ -26,14 +26,9 @@
               <p v-show="doc.ship">
                 <span class="grey-text">Т/х:</span> {{ doc.ship }} <small>({{ doc.flight }})</small>
               </p>
-              <!-- <button-print-conosament :document="doc.document" />
-              <button-download-conosament :document="doc.document" /> -->
               <buttons-conosament :document="doc.document" />
               <div class="divider" v-if="inx + 1 < request.documents.length"></div>
             </div>
-            <!-- <div class="collapsible-btns"> -->
-            <!-- <a href="#" class="black-text waves-effect btn-flat"><i class="material-icons left">email</i></a> -->
-            <!-- </div> -->
           </div>
         </li>
         <li>
@@ -48,26 +43,20 @@
                 <span class="grey-text">Счет:</span> {{ request.invoice.number }} <small>от {{ request.invoice.date }}</small>
               </p>
               <p><span class="grey-text">Сумма по счету:</span> {{ request.invoice.summa | currency }}</p>
-            </div>
-            <div class="collapsible-btns">
-              <a href="#" class="black-text waves-effect btn-flat hide-on-med-and-down"><i class="material-icons left">print</i></a>
-              <a href="#" class="black-text waves-effect btn-flat"><i class="material-icons left">download</i></a>
-              <!-- <a href="#" class="black-text waves-effect btn-flat"><i class="material-icons left">email</i></a> -->
+              <buttons-invoice :invoice="request.invoice" />
             </div>
           </div>
         </li>
       </ul>
     </div>
-    <!-- <div class="card-action">
-      <router-link tag="a" class="btn waves-effect white black-text" :to="'/request?number=' + this.request.number"><i class="material-icons left">edit</i>Редактировать</router-link>
-    </div> -->
   </div>
 </template>
 
 <script>
 import ButtonsConosament from './ButtonsConosament.vue'
+import ButtonsInvoice from './ButtonsInvoice.vue'
 export default {
-  components: { ButtonsConosament },
+  components: { ButtonsConosament, ButtonsInvoice },
   props: ['request'],
   data: () => ({
     collapsible: null,
